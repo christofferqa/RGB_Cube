@@ -135,7 +135,7 @@ $$.HashMapImplementation = {"":
       return insertionIndex;
     } else if ($.eqB(existingKey, key))
       return hash;
-    else if (insertionIndex < 0 && $.CTC14 === existingKey)
+    else if (insertionIndex < 0 && $.CTC15 === existingKey)
       insertionIndex = hash;
     var numberOfProbes0 = numberOfProbes + 1;
     hash = $.HashMapImplementation__nextProbe(hash, numberOfProbes, this._keys.length);
@@ -186,7 +186,7 @@ $$.HashMapImplementation = {"":
                 return insertionIndex;
               } else if ($.eqB(existingKey, key))
                 return hash;
-              else if (insertionIndex < 0 && $.CTC14 === existingKey)
+              else if (insertionIndex < 0 && $.CTC15 === existingKey)
                 insertionIndex = hash;
               var numberOfProbes0 = numberOfProbes + 1;
               hash = $.HashMapImplementation__nextProbe(hash, numberOfProbes, this._keys.length);
@@ -260,7 +260,7 @@ $$.HashMapImplementation = {"":
     if (i >= oldKeys.length)
       throw $.ioore(i);
     var key = oldKeys[i];
-    if (key == null || key === $.CTC14)
+    if (key == null || key === $.CTC15)
       continue;
     if (i >= oldValues.length)
       throw $.ioore(i);
@@ -300,7 +300,7 @@ $$.HashMapImplementation = {"":
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   t1 = t1[index];
-  if (t1 == null || t1 === $.CTC14)
+  if (t1 == null || t1 === $.CTC15)
     this._numberOfEntries = $.add(this._numberOfEntries, 1);
   t1 = this._keys;
   if (index >= t1.length)
@@ -335,7 +335,7 @@ $$.HashMapImplementation = {"":
     if (i >= t1.length)
       throw $.ioore(i);
     var key = t1[i];
-    if (!(key == null) && !(key === $.CTC14)) {
+    if (!(key == null) && !(key === $.CTC15)) {
       t1 = this._values;
       if (i >= t1.length)
         throw $.ioore(i);
@@ -451,13 +451,13 @@ $$._DoubleLinkedQueueEntrySentinel = {"":
  ["_previous", "_next", "_element"],
  "super": "DoubleLinkedQueueEntry",
  remove$0: function() {
-  throw $.$$throw($.CTC15);
+  throw $.$$throw($.CTC16);
 },
  _asNonSentinelEntry$0: function() {
   return;
 },
  get$element: function() {
-  throw $.$$throw($.CTC15);
+  throw $.$$throw($.CTC16);
 },
  _DoubleLinkedQueueEntrySentinel$0: function() {
   this._link$2(this, this);
@@ -809,7 +809,7 @@ $$.ConstantMap = {"":
   return $.Maps_mapToString(this);
 },
  _throwImmutable$0: function() {
-  throw $.$$throw($.CTC18);
+  throw $.$$throw($.CTC19);
 },
  operator$indexSet$2: function(key, val) {
   return this._throwImmutable$0();
@@ -828,21 +828,34 @@ $$.MetaInfo = {"":
 $$.ColorCube = {"":
  ["A1", "B1", "C1", "pA1", "pB1", "pC1", "A2", "D2", "M2", "N2", "pA2", "pB2", "pD2", "pE2", "pM2", "pN2", "A3", "B3", "C3", "pA3", "pB3", "pC3", "k=", "size", "canvas?"],
  "super": "Object",
- draw$2: function(c, k) {
-  if ($.leB(k, 255))
-    this.draw1$2(c, k);
-  if ($.gtB(k, 255) && $.ltB(k, 510))
-    this.draw2$2(c, k);
-  if ($.geB(k, 510))
-    this.draw3$2(c, k);
+ canvasCoord$2: function(x, y) {
+  return [$.toInt($.round($.add(x, $.tdiv(this.size, 2)))), $.toInt($.round($.sub($.tdiv(this.size, 2), y)))];
 },
- drawColorTriangle$10: function(imgData, a, p1, p2, p3, A, B, C, ymax, orientation) {
+ draw$1: function(c) {
+  if ($.leB(this.k, 255)) {
+    this.init1$0();
+    this.draw1$1(c);
+  }
+  if ($.gtB(this.k, 255) && $.ltB(this.k, 510)) {
+    this.init2$0();
+    this.draw2$1(c);
+  }
+  if ($.geB(this.k, 510)) {
+    this.init3$0();
+    this.draw3$1(c);
+  }
+},
+ drawColorTriangle$9: function(imgData, p1, p2, p3, A, B, C, ymax, orientation) {
+  if (typeof p1 !== 'string' && (typeof p1 !== 'object' || p1 === null || p1.constructor !== Array && !p1.is$JavaScriptIndexingBehavior()))
+    return this.drawColorTriangle$9$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
+  if (typeof p2 !== 'string' && (typeof p2 !== 'object' || p2 === null || p2.constructor !== Array && !p2.is$JavaScriptIndexingBehavior()))
+    return this.drawColorTriangle$9$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
   if (typeof A !== 'string' && (typeof A !== 'object' || A === null || A.constructor !== Array && !A.is$JavaScriptIndexingBehavior()))
-    return this.drawColorTriangle$10$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
+    return this.drawColorTriangle$9$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
   if (typeof B !== 'string' && (typeof B !== 'object' || B === null || B.constructor !== Array && !B.is$JavaScriptIndexingBehavior()))
-    return this.drawColorTriangle$10$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
+    return this.drawColorTriangle$9$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
   if (typeof C !== 'string' && (typeof C !== 'object' || C === null || C.constructor !== Array && !C.is$JavaScriptIndexingBehavior()))
-    return this.drawColorTriangle$10$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
+    return this.drawColorTriangle$9$bailout(1, imgData, p1, p2, p3, A, B, C, ymax, orientation, 0, 0, 0, 0);
   if (orientation) {
     var compare = new $.ColorCube_drawColorTriangle_anon();
     var delta = -1;
@@ -850,19 +863,26 @@ $$.ColorCube = {"":
     compare = new $.ColorCube_drawColorTriangle_anon0();
     delta = 1;
   }
-  var x1 = p1.get$x();
+  var t1 = p1.length;
+  if (0 >= t1)
+    throw $.ioore(0);
+  var x1 = p1[0];
   if (typeof x1 !== 'number')
-    return this.drawColorTriangle$10$bailout(2, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, 0, 0);
-  var x2 = p2.get$x();
+    return this.drawColorTriangle$9$bailout(2, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, 0, 0);
+  if (0 >= p2.length)
+    throw $.ioore(0);
+  var x2 = p2[0];
   if (typeof x2 !== 'number')
-    return this.drawColorTriangle$10$bailout(3, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, x2, 0);
-  var y = p1.get$y();
+    return this.drawColorTriangle$9$bailout(3, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, x2, 0);
+  if (1 >= t1)
+    throw $.ioore(1);
+  var y = p1[1];
   if (typeof y !== 'number')
-    return this.drawColorTriangle$10$bailout(4, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, x2, y);
+    return this.drawColorTriangle$9$bailout(4, imgData, p1, p2, p3, A, B, C, ymax, delta, compare, x1, x2, y);
   for (var d = 0.134, color = null, p = null; compare.call$2(y, ymax) === true;) {
     for (var x = x1; x <= x2; ++x) {
-      p = $.Point$(x, y);
-      var t1 = A.length;
+      p = [x, y];
+      t1 = A.length;
       if (0 >= t1)
         throw $.ioore(0);
       var t2 = A[0];
@@ -923,7 +943,7 @@ $$.ColorCube = {"":
       ++d;
   }
 },
- drawColorTriangle$10$bailout: function(state, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12) {
+ drawColorTriangle$9$bailout: function(state, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12) {
   switch (state) {
     case 1:
       var imgData = env0;
@@ -990,18 +1010,18 @@ $$.ColorCube = {"":
         compare = new $.ColorCube_drawColorTriangle_anon0();
         delta = 1;
       }
-      var x1 = p1.get$x();
+      var x1 = $.index(p1, 0);
     case 2:
       state = 0;
-      var x2 = p2.get$x();
+      var x2 = $.index(p2, 0);
     case 3:
       state = 0;
-      var y = p1.get$y();
+      var y = $.index(p1, 1);
     case 4:
       state = 0;
       for (var d = 0.134, color = null, p = null; compare.call$2(y, ymax) === true;) {
         for (var x = x1; $.leB(x, x2); x = $.add(x, 1)) {
-          p = $.Point$(x, y);
+          p = [x, y];
           color = this.colorAtPoint$13(p, p1, p2, p3, $.index(A, 0), $.index(A, 1), $.index(A, 2), $.index(B, 0), $.index(B, 1), $.index(B, 2), $.index(C, 0), $.index(C, 1), $.index(C, 2));
           var t1 = imgData.get$data();
           var t2 = $.add(x, $.mul(this.size, y));
@@ -1036,90 +1056,117 @@ $$.ColorCube = {"":
       }
   }
 },
- canvasCoordPoint$2: function(x, y) {
-  return $.Point$($.toInt($.round($.add(x, $.tdiv(this.size, 2)))), $.toInt($.round($.sub($.tdiv(this.size, 2), y))));
-},
- init$1: function(a) {
-  this.A1 = [a, 0, 0];
-  this.B1 = [0, a, 0];
-  this.C1 = [0, 0, a];
-  var t1 = $.div($.neg(a), 1.4142135623730951);
-  var t2 = $.neg(a);
+ init1$0: function() {
+  this.A1 = [this.k, 0, 0];
+  this.B1 = [0, this.k, 0];
+  this.C1 = [0, 0, this.k];
+  var t1 = $.div($.neg(this.k), 1.4142135623730951);
+  var t2 = $.neg(this.k);
   var t3 = $.get$ColorCube_SQRT3();
   if (typeof t3 !== 'number')
     throw $.iae(t3);
-  this.pB1 = this.canvasCoordPoint$2(t1, $.div(t2, 1.4142135623730951 * t3));
-  var t4 = $.div(a, 1.4142135623730951);
-  var t5 = $.neg(a);
+  this.pB1 = this.canvasCoord$2(t1, $.div(t2, 1.4142135623730951 * t3));
+  var t4 = $.div(this.k, 1.4142135623730951);
+  var t5 = $.neg(this.k);
   var t6 = $.get$ColorCube_SQRT3();
   if (typeof t6 !== 'number')
     throw $.iae(t6);
-  this.pA1 = this.canvasCoordPoint$2(t4, $.div(t5, 1.4142135623730951 * t6));
-  this.pC1 = this.canvasCoordPoint$2(0, $.div($.mul(a, 1.4142135623730951), $.get$ColorCube_SQRT3()));
-  this.A2 = [255, 0, $.sub(a, 255)];
-  this.D2 = [0, 255, $.sub(a, 255)];
-  this.M2 = [0, 0, a];
-  this.N2 = [255, 255, $.sub(a, 510)];
-  var t7 = $.get$ColorCube_SQRT3();
+  this.pA1 = this.canvasCoord$2(t4, $.div(t5, 1.4142135623730951 * t6));
+  this.pC1 = this.canvasCoord$2(0, $.div($.mul(this.k, 1.4142135623730951), $.get$ColorCube_SQRT3()));
+},
+ init2$0: function() {
+  this.A2 = [255, 0, $.sub(this.k, 255)];
+  this.D2 = [0, 255, $.sub(this.k, 255)];
+  this.M2 = [0, 0, this.k];
+  this.N2 = [255, 255, $.sub(this.k, 510)];
+  var t1 = $.get$ColorCube_SQRT3();
+  if (typeof t1 !== 'number')
+    throw $.iae(t1);
+  t1 = 1.4142135623730951 / t1;
+  var t2 = this.k;
+  if (typeof t2 !== 'number')
+    throw $.iae(t2);
+  t2 = t1 * t2;
+  t1 = $.mul($.div($.get$ColorCube_SQRT3(), 1.4142135623730951), 255);
+  if (typeof t1 !== 'number')
+    throw $.iae(t1);
+  this.pA2 = this.canvasCoord$2(180.3122292025696, t2 - t1);
+  var t3 = $.sub(this.k, 255);
+  if (typeof t3 !== 'number')
+    throw $.iae(t3);
+  t3 = 0.7071067811865476 * t3;
+  var t4 = $.div($.get$ColorCube_SQRT3(), 1.4142135623730951);
+  var t5 = $.div(this.k, 3);
+  if (typeof t5 !== 'number')
+    throw $.iae(t5);
+  this.pB2 = this.canvasCoord$2(t3, $.mul(t4, 255 - t5));
+  var t6 = $.get$ColorCube_SQRT3();
+  if (typeof t6 !== 'number')
+    throw $.iae(t6);
+  t6 = 1.4142135623730951 / t6;
+  var t7 = this.k;
   if (typeof t7 !== 'number')
     throw $.iae(t7);
-  t7 = 1.4142135623730951 / t7;
-  if (typeof a !== 'number')
-    throw $.iae(a);
-  t7 *= a;
-  var t8 = $.mul($.div($.get$ColorCube_SQRT3(), 1.4142135623730951), 255);
-  if (typeof t8 !== 'number')
-    throw $.iae(t8);
-  this.pA2 = this.canvasCoordPoint$2(180.3122292025696, t7 - t8);
-  var t9 = 0.7071067811865476 * (a - 255);
-  var t10 = $.div($.get$ColorCube_SQRT3(), 1.4142135623730951);
-  var t11 = a / 3;
-  this.pB2 = this.canvasCoordPoint$2(t9, $.mul(t10, 255 - t11));
-  var t12 = $.get$ColorCube_SQRT3();
+  t7 = t6 * t7;
+  t6 = $.mul($.div($.get$ColorCube_SQRT3(), 1.4142135623730951), 255);
+  if (typeof t6 !== 'number')
+    throw $.iae(t6);
+  this.pD2 = this.canvasCoord$2(-180.3122292025696, t7 - t6);
+  var t8 = $.sub($.div(this.k, 1.4142135623730951), 360.62445840513925);
+  var t9 = $.neg(this.k);
+  var t10 = $.get$ColorCube_SQRT3();
+  if (typeof t10 !== 'number')
+    throw $.iae(t10);
+  this.pE2 = this.canvasCoord$2(t8, $.div(t9, 1.4142135623730951 * t10));
+  var t11 = $.get$ColorCube_SQRT3();
+  if (typeof t11 !== 'number')
+    throw $.iae(t11);
+  t11 = 1.4142135623730951 * t11;
+  var t12 = this.k;
   if (typeof t12 !== 'number')
     throw $.iae(t12);
-  var t13 = 1.4142135623730951 / t12 * a;
-  var t14 = $.mul($.div($.get$ColorCube_SQRT3(), 1.4142135623730951), 255);
+  this.pM2 = this.canvasCoord$2(0, t11 * t12 / 3);
+  var t13 = $.get$ColorCube_SQRT3();
+  if (typeof t13 !== 'number')
+    throw $.iae(t13);
+  t13 = 1.4142135623730951 * t13;
+  var t14 = $.sub($.div(this.k, 3), 255);
   if (typeof t14 !== 'number')
     throw $.iae(t14);
-  this.pD2 = this.canvasCoordPoint$2(-180.3122292025696, t13 - t14);
-  var t15 = a / 1.4142135623730951 - 360.62445840513925;
-  var t16 = -a;
-  var t17 = $.get$ColorCube_SQRT3();
-  if (typeof t17 !== 'number')
-    throw $.iae(t17);
-  this.pE2 = this.canvasCoordPoint$2(t15, t16 / (1.4142135623730951 * t17));
-  var t18 = $.get$ColorCube_SQRT3();
-  if (typeof t18 !== 'number')
-    throw $.iae(t18);
-  this.pM2 = this.canvasCoordPoint$2(0, 1.4142135623730951 * t18 * a / 3);
-  var t19 = $.get$ColorCube_SQRT3();
-  if (typeof t19 !== 'number')
-    throw $.iae(t19);
-  this.pN2 = this.canvasCoordPoint$2(0, 1.4142135623730951 * t19 * (t11 - 255));
-  var t20 = a - 510;
-  this.C3 = [255, 255, t20];
-  this.A3 = [255, t20, 255];
-  this.B3 = [t20, 255, 255];
-  var t21 = 765 - a;
-  var t22 = -t21;
-  var t23 = t22 * 1.4142135623730951;
-  var t24 = $.get$ColorCube_SQRT3();
-  if (typeof t24 !== 'number')
-    throw $.iae(t24);
-  this.pC3 = this.canvasCoordPoint$2(0, t23 / t24);
-  var t25 = t21 / 1.4142135623730951;
-  var t26 = $.get$ColorCube_SQRT3();
-  if (typeof t26 !== 'number')
-    throw $.iae(t26);
-  this.pA3 = this.canvasCoordPoint$2(t25, t21 / (1.4142135623730951 * t26));
-  t22 /= 1.4142135623730951;
-  var t27 = $.get$ColorCube_SQRT3();
-  if (typeof t27 !== 'number')
-    throw $.iae(t27);
-  this.pB3 = this.canvasCoordPoint$2(t22, t21 / (1.4142135623730951 * t27));
+  this.pN2 = this.canvasCoord$2(0, t13 * t14);
 },
- draw1$2: function(c, a) {
+ init3$0: function() {
+  this.C3 = [255, 255, $.sub(this.k, 510)];
+  this.A3 = [255, $.sub(this.k, 510), 255];
+  this.B3 = [$.sub(this.k, 510), 255, 255];
+  var t1 = this.k;
+  if (typeof t1 !== 'number')
+    throw $.iae(t1);
+  var t2 = -(765 - t1) * 1.4142135623730951;
+  var t3 = $.get$ColorCube_SQRT3();
+  if (typeof t3 !== 'number')
+    throw $.iae(t3);
+  this.pC3 = this.canvasCoord$2(0, t2 / t3);
+  var t4 = this.k;
+  if (typeof t4 !== 'number')
+    throw $.iae(t4);
+  var t5 = (765 - t4) / 1.4142135623730951;
+  t4 = 765 - t4;
+  var t6 = $.get$ColorCube_SQRT3();
+  if (typeof t6 !== 'number')
+    throw $.iae(t6);
+  this.pA3 = this.canvasCoord$2(t5, t4 / (1.4142135623730951 * t6));
+  var t7 = this.k;
+  if (typeof t7 !== 'number')
+    throw $.iae(t7);
+  var t8 = -(765 - t7) / 1.4142135623730951;
+  t7 = 765 - t7;
+  var t9 = $.get$ColorCube_SQRT3();
+  if (typeof t9 !== 'number')
+    throw $.iae(t9);
+  this.pB3 = this.canvasCoord$2(t8, t7 / (1.4142135623730951 * t9));
+},
+ draw1$1: function(c) {
   var t1 = this.size;
   c.clearRect$4(0, 0, t1, t1);
   t1 = this.size;
@@ -1127,19 +1174,19 @@ $$.ColorCube = {"":
   t1 = this.pB1;
   var t2 = this.pA1;
   var t3 = this.pC1;
-  this.drawColorTriangle$10(imgData, a, t1, t2, t3, this.B1, this.A1, this.C1, t3.get$y(), true);
+  this.drawColorTriangle$9(imgData, t1, t2, t3, this.B1, this.A1, this.C1, $.index(t3, 1), true);
   c.putImageData$3(imgData, 0, 0);
 },
- draw2$2: function(ctx, a) {
+ draw2$1: function(ctx) {
   var t1 = this.size;
   ctx.clearRect$4(0, 0, t1, t1);
   t1 = this.size;
   var imgData = ctx.createImageData$2(t1, t1);
-  this.drawColorTriangle$10(imgData, a, this.pD2, this.pA2, this.pM2, this.D2, this.A2, this.M2, this.pB2.get$y(), true);
-  this.drawColorTriangle$10(imgData, a, this.pD2, this.pA2, this.pN2, this.D2, this.A2, this.N2, this.pE2.get$y(), false);
+  this.drawColorTriangle$9(imgData, this.pD2, this.pA2, this.pM2, this.D2, this.A2, this.M2, $.index(this.pB2, 1), true);
+  this.drawColorTriangle$9(imgData, this.pD2, this.pA2, this.pN2, this.D2, this.A2, this.N2, $.index(this.pE2, 1), false);
   ctx.putImageData$3(imgData, 0, 0);
 },
- draw3$2: function(c, a) {
+ draw3$1: function(c) {
   var t1 = this.size;
   c.clearRect$4(0, 0, t1, t1);
   t1 = this.size;
@@ -1147,112 +1194,96 @@ $$.ColorCube = {"":
   t1 = this.pB3;
   var t2 = this.pA3;
   var t3 = this.pC3;
-  this.drawColorTriangle$10(imgData, a, t1, t2, t3, this.B3, this.A3, this.C3, t3.get$y(), false);
+  this.drawColorTriangle$9(imgData, t1, t2, t3, this.B3, this.A3, this.C3, $.index(t3, 1), false);
   c.putImageData$3(imgData, 0, 0);
 },
  colorAtPoint$13: function(p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3) {
-  var t1 = p.x;
-  if (typeof t1 !== 'number')
-    return this.colorAtPoint$13$bailout(1, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, 0, 0, 0, 0);
-  var t3 = p3.get$x();
-  if (typeof t3 !== 'number')
-    return this.colorAtPoint$13$bailout(2, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, t3, 0, 0, 0);
-  t3 = t1 - t3;
-  var t5 = p2.get$y();
+  if (typeof p1 !== 'string' && (typeof p1 !== 'object' || p1 === null || p1.constructor !== Array && !p1.is$JavaScriptIndexingBehavior()))
+    return this.colorAtPoint$13$bailout(1, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, 0, 0, 0, 0, 0);
+  if (typeof p2 !== 'string' && (typeof p2 !== 'object' || p2 === null || p2.constructor !== Array && !p2.is$JavaScriptIndexingBehavior()))
+    return this.colorAtPoint$13$bailout(1, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, 0, 0, 0, 0, 0);
+  if (typeof p3 !== 'string' && (typeof p3 !== 'object' || p3 === null || p3.constructor !== Array && !p3.is$JavaScriptIndexingBehavior()))
+    return this.colorAtPoint$13$bailout(1, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, 0, 0, 0, 0, 0);
+  var t1 = p.length;
+  if (0 >= t1)
+    throw $.ioore(0);
+  var t2 = p[0];
+  if (typeof t2 !== 'number')
+    return this.colorAtPoint$13$bailout(2, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t2, 0, 0, 0, 0);
+  var t4 = p3.length;
+  if (0 >= t4)
+    throw $.ioore(0);
+  var t5 = p3[0];
   if (typeof t5 !== 'number')
-    return this.colorAtPoint$13$bailout(3, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, t3, t5, 0, 0);
-  var t7 = p3.get$y();
-  if (typeof t7 !== 'number')
-    return this.colorAtPoint$13$bailout(4, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, t3, t5, t7, 0);
-  t3 *= t5 - t7;
-  var t9 = p.y;
-  if (typeof t9 !== 'number')
-    return this.colorAtPoint$13$bailout(5, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t9, t1, t3, 0, 0, 0);
-  var t11 = p3.get$y();
-  if (typeof t11 !== 'number')
-    return this.colorAtPoint$13$bailout(6, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t9, t1, t3, t11, 0, 0);
-  t11 = t9 - t11;
-  t9 = p2.get$x();
-  if (typeof t9 !== 'number')
-    return this.colorAtPoint$13$bailout(7, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, t3, t11, t9, 0, 0);
-  var t14 = p3.get$x();
+    return this.colorAtPoint$13$bailout(3, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t2, t5, 0, 0, 0);
+  var t7 = t2 - t5;
+  if (1 >= p2.length)
+    throw $.ioore(1);
+  var t8 = p2[1];
+  if (typeof t8 !== 'number')
+    return this.colorAtPoint$13$bailout(4, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t7, t8, 0, 0, 0);
+  if (1 >= t4)
+    throw $.ioore(1);
+  var t10 = p3[1];
+  if (typeof t10 !== 'number')
+    return this.colorAtPoint$13$bailout(5, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t7, t8, t10, 0, 0);
+  t7 *= t8 - t10;
+  if (1 >= t1)
+    throw $.ioore(1);
+  var t12 = p[1];
+  if (typeof t12 !== 'number')
+    return this.colorAtPoint$13$bailout(6, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t12, t7, 0, 0, 0);
+  t12 -= t10;
+  var t14 = p2[0];
   if (typeof t14 !== 'number')
-    return this.colorAtPoint$13$bailout(8, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, t3, t11, t9, t14, 0);
-  t3 -= t11 * (t9 - t14);
-  var t16 = p1.get$x();
-  if (typeof t16 !== 'number')
-    return this.colorAtPoint$13$bailout(9, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t3, t16, t1, 0, 0, 0);
-  var t18 = p3.get$x();
-  if (typeof t18 !== 'number')
-    return this.colorAtPoint$13$bailout(10, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t18, t3, t16, t1, 0, 0);
-  t18 = t16 - t18;
-  t16 = p2.get$y();
-  if (typeof t16 !== 'number')
-    return this.colorAtPoint$13$bailout(11, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t16, t3, t1, t18, 0, 0);
-  var t21 = p3.get$y();
-  if (typeof t21 !== 'number')
-    return this.colorAtPoint$13$bailout(12, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t16, t21, t3, t1, t18, 0);
-  t18 *= t16 - t21;
-  var t23 = p1.get$y();
-  if (typeof t23 !== 'number')
-    return this.colorAtPoint$13$bailout(13, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t3, t18, t1, t23, 0, 0);
-  var t25 = p3.get$y();
-  if (typeof t25 !== 'number')
-    return this.colorAtPoint$13$bailout(14, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t3, t18, t1, t25, t23, 0);
-  t25 = t23 - t25;
-  t23 = p2.get$x();
-  if (typeof t23 !== 'number')
-    return this.colorAtPoint$13$bailout(15, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t3, t18, t1, t25, t23, 0);
-  var t28 = p3.get$x();
-  if (typeof t28 !== 'number')
-    return this.colorAtPoint$13$bailout(16, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t3, t18, t1, t25, t23, t28);
-  var alpha = t3 / (t18 - t25 * (t23 - t28));
-  t3 = p3.get$x();
-  if (typeof t3 !== 'number')
-    return this.colorAtPoint$13$bailout(17, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, alpha, t3, 0, 0, 0);
-  t3 = t1 - t3;
-  t1 = p1.get$x();
-  if (typeof t1 !== 'number')
-    return this.colorAtPoint$13$bailout(18, t3, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t1, alpha, 0, 0, 0, 0);
-  var t32 = p3.get$x();
-  if (typeof t32 !== 'number')
-    return this.colorAtPoint$13$bailout(19, t3, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t32, t1, alpha, 0, 0, 0);
-  t3 -= alpha * (t1 - t32);
-  var t34 = p2.get$x();
-  if (typeof t34 !== 'number')
-    return this.colorAtPoint$13$bailout(20, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t34, t3, alpha, 0, 0, 0, 0, 0);
-  var t36 = p3.get$x();
-  if (typeof t36 !== 'number')
-    return this.colorAtPoint$13$bailout(21, r1, g1, b1, r2, g2, b2, r3, g3, b3, t34, t36, t3, alpha, 0, 0, 0, 0, 0);
-  var beta = t3 / (t34 - t36);
+    return this.colorAtPoint$13$bailout(8, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t14, t12, t7, 0, 0);
+  t7 -= t12 * (t14 - t5);
+  var t16 = p1.length;
+  if (0 >= t16)
+    throw $.ioore(0);
+  var t17 = p1[0];
+  if (typeof t17 !== 'number')
+    return this.colorAtPoint$13$bailout(10, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t7, t17, 0, 0, 0);
+  var t19 = t17 - t5;
+  t19 *= t8 - t10;
+  if (1 >= t16)
+    throw $.ioore(1);
+  var t20 = p1[1];
+  if (typeof t20 !== 'number')
+    return this.colorAtPoint$13$bailout(14, p, p1, p2, p3, r1, g1, b1, r2, g2, b2, r3, g3, b3, t7, t19, t20, 0, 0);
+  t10 = t20 - t10;
+  var alpha = t7 / (t19 - t10 * (t14 - t5));
+  t2 -= t5;
+  t2 -= alpha * (t17 - t5);
+  var beta = t2 / (t14 - t5);
   var gamma = 1 - alpha - beta;
   if (typeof r1 !== 'number')
     throw $.iae(r1);
-  t3 = alpha * r1;
+  t2 = alpha * r1;
   if (typeof r2 !== 'number')
     throw $.iae(r2);
-  t3 += beta * r2;
+  t2 += beta * r2;
   if (typeof r3 !== 'number')
     throw $.iae(r3);
-  var red = $.toInt($.round(t3 + gamma * r3));
+  var red = $.toInt($.round(t2 + gamma * r3));
   if (typeof g1 !== 'number')
     throw $.iae(g1);
-  var t38 = alpha * g1;
+  t7 = alpha * g1;
   if (typeof g2 !== 'number')
     throw $.iae(g2);
-  t38 += beta * g2;
+  t7 += beta * g2;
   if (typeof g3 !== 'number')
     throw $.iae(g3);
-  var green = $.toInt($.round(t38 + gamma * g3));
+  var green = $.toInt($.round(t7 + gamma * g3));
   if (typeof b1 !== 'number')
     throw $.iae(b1);
-  var t39 = alpha * b1;
+  t20 = alpha * b1;
   if (typeof b2 !== 'number')
     throw $.iae(b2);
-  t39 += beta * b2;
+  t20 += beta * b2;
   if (typeof b3 !== 'number')
     throw $.iae(b3);
-  return [red, green, $.toInt($.round(t39 + gamma * b3))];
+  return [red, green, $.toInt($.round(t20 + gamma * b3))];
 },
  colorAtPoint$13$bailout: function(state, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12, env13, env14, env15, env16, env17) {
   switch (state) {
@@ -1270,7 +1301,6 @@ $$.ColorCube = {"":
       var r3 = env10;
       var g3 = env11;
       var b3 = env12;
-      t1 = env13;
       break;
     case 2:
       p = env0;
@@ -1287,7 +1317,6 @@ $$.ColorCube = {"":
       g3 = env11;
       b3 = env12;
       t1 = env13;
-      t3 = env14;
       break;
     case 3:
       p = env0;
@@ -1305,7 +1334,6 @@ $$.ColorCube = {"":
       b3 = env12;
       t1 = env13;
       t3 = env14;
-      t5 = env15;
       break;
     case 4:
       p = env0;
@@ -1321,232 +1349,248 @@ $$.ColorCube = {"":
       r3 = env10;
       g3 = env11;
       b3 = env12;
-      t1 = env13;
-      t3 = env14;
-      t5 = env15;
-      t7 = env16;
+      t3 = env13;
+      t1 = env14;
       break;
     case 5:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t9 = env12;
-      t1 = env13;
-      t3 = env14;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t3 = env13;
+      t1 = env14;
+      t6 = env15;
       break;
     case 6:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t9 = env12;
-      t1 = env13;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t8 = env13;
       t3 = env14;
-      t11 = env15;
       break;
     case 7:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t1 = env12;
-      t3 = env13;
-      t11 = env14;
-      t9 = env15;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t10 = env13;
+      t8 = env14;
+      t3 = env15;
       break;
     case 8:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t1 = env12;
-      t3 = env13;
-      t11 = env14;
-      t9 = env15;
-      t14 = env16;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t8 = env13;
+      t10 = env14;
+      t3 = env15;
       break;
     case 9:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t3 = env12;
-      t16 = env13;
-      t1 = env14;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t8 = env13;
+      t10 = env14;
+      t13 = env15;
+      t3 = env16;
       break;
     case 10:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t18 = env12;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
       t3 = env13;
-      t16 = env14;
-      t1 = env15;
+      t15 = env14;
       break;
     case 11:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t16 = env12;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
       t3 = env13;
-      t1 = env14;
-      t18 = env15;
+      t15 = env14;
+      t17 = env15;
       break;
     case 12:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t16 = env12;
-      t21 = env13;
-      t3 = env14;
-      t1 = env15;
-      t18 = env16;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t3 = env13;
+      t17 = env14;
+      t15 = env15;
       break;
     case 13:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t3 = env12;
-      t18 = env13;
-      t1 = env14;
-      t23 = env15;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t3 = env13;
+      t17 = env14;
+      t15 = env15;
+      t20 = env16;
       break;
     case 14:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t3 = env12;
-      t18 = env13;
-      t1 = env14;
-      t25 = env15;
-      t23 = env16;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t3 = env13;
+      t17 = env14;
+      t22 = env15;
       break;
     case 15:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t3 = env12;
-      t18 = env13;
-      t1 = env14;
-      t25 = env15;
-      t23 = env16;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t3 = env13;
+      t24 = env14;
+      t17 = env15;
+      t22 = env16;
       break;
     case 16:
-      p1 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t3 = env12;
-      t18 = env13;
-      t1 = env14;
-      t25 = env15;
-      t23 = env16;
-      t28 = env17;
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t24 = env13;
+      t3 = env14;
+      t22 = env15;
+      t17 = env16;
       break;
     case 17:
+      p = env0;
+      p1 = env1;
+      p2 = env2;
+      p3 = env3;
+      r1 = env4;
+      g1 = env5;
+      b1 = env6;
+      r2 = env7;
+      g2 = env8;
+      b2 = env9;
+      r3 = env10;
+      g3 = env11;
+      b3 = env12;
+      t24 = env13;
+      t3 = env14;
+      t27 = env15;
+      t22 = env16;
+      t17 = env17;
+      break;
+    case 18:
       p1 = env0;
       p2 = env1;
       p3 = env2;
@@ -1559,28 +1603,11 @@ $$.ColorCube = {"":
       r3 = env9;
       g3 = env10;
       b3 = env11;
-      t1 = env12;
-      alpha = env13;
-      t3 = env14;
-      break;
-    case 18:
-      t3 = env0;
-      p2 = env1;
-      p3 = env2;
-      r1 = env3;
-      g1 = env4;
-      b1 = env5;
-      r2 = env6;
-      g2 = env7;
-      b2 = env8;
-      r3 = env9;
-      g3 = env10;
-      b3 = env11;
-      t1 = env12;
-      alpha = env13;
+      alpha = env12;
+      t3 = env13;
       break;
     case 19:
-      t3 = env0;
+      p1 = env0;
       p2 = env1;
       p3 = env2;
       r1 = env3;
@@ -1592,157 +1619,201 @@ $$.ColorCube = {"":
       r3 = env9;
       g3 = env10;
       b3 = env11;
-      t32 = env12;
-      t1 = env13;
-      alpha = env14;
+      alpha = env12;
+      t3 = env13;
+      t30 = env14;
       break;
     case 20:
-      p3 = env0;
-      r1 = env1;
-      g1 = env2;
-      b1 = env3;
-      r2 = env4;
-      g2 = env5;
-      b2 = env6;
-      r3 = env7;
-      g3 = env8;
-      b3 = env9;
-      t34 = env10;
-      t3 = env11;
-      alpha = env12;
+      p2 = env0;
+      p3 = env1;
+      r1 = env2;
+      g1 = env3;
+      b1 = env4;
+      r2 = env5;
+      g2 = env6;
+      b2 = env7;
+      r3 = env8;
+      g3 = env9;
+      b3 = env10;
+      alpha = env11;
+      t30 = env12;
+      t3 = env13;
       break;
     case 21:
-      r1 = env0;
-      g1 = env1;
-      b1 = env2;
-      r2 = env3;
-      g2 = env4;
-      b2 = env5;
-      r3 = env6;
-      g3 = env7;
-      b3 = env8;
-      t34 = env9;
-      t36 = env10;
-      t3 = env11;
-      alpha = env12;
+      p2 = env0;
+      p3 = env1;
+      r1 = env2;
+      g1 = env3;
+      b1 = env4;
+      r2 = env5;
+      g2 = env6;
+      b2 = env7;
+      r3 = env8;
+      g3 = env9;
+      b3 = env10;
+      alpha = env11;
+      t30 = env12;
+      t3 = env13;
+      t33 = env14;
+      break;
+    case 22:
+      t35 = env0;
+      p3 = env1;
+      r1 = env2;
+      g1 = env3;
+      b1 = env4;
+      r2 = env5;
+      g2 = env6;
+      b2 = env7;
+      r3 = env8;
+      g3 = env9;
+      b3 = env10;
+      alpha = env11;
+      t30 = env12;
+      break;
+    case 23:
+      t35 = env0;
+      t37 = env1;
+      r1 = env2;
+      g1 = env3;
+      b1 = env4;
+      r2 = env5;
+      g2 = env6;
+      b2 = env7;
+      r3 = env8;
+      g3 = env9;
+      b3 = env10;
+      alpha = env11;
+      t30 = env12;
       break;
   }
   switch (state) {
     case 0:
-      var t1 = p.x;
     case 1:
       state = 0;
-      var t3 = p3.get$x();
+      if (0 >= p.length)
+        throw $.ioore(0);
+      var t1 = p[0];
     case 2:
       state = 0;
-      t3 = $.sub(t1, t3);
-      var t5 = p2.get$y();
+      var t3 = $.index(p3, 0);
     case 3:
       state = 0;
-      var t7 = p3.get$y();
+      t3 = $.sub(t1, t3);
+      t1 = $.index(p2, 1);
     case 4:
       state = 0;
-      t3 = $.mul(t3, $.sub(t5, t7));
-      var t9 = p.y;
+      var t6 = $.index(p3, 1);
     case 5:
       state = 0;
-      var t11 = p3.get$y();
+      t3 = $.mul(t3, $.sub(t1, t6));
+      if (1 >= p.length)
+        throw $.ioore(1);
+      var t8 = p[1];
     case 6:
       state = 0;
-      t11 = $.sub(t9, t11);
-      t9 = p2.get$x();
+      var t10 = $.index(p3, 1);
     case 7:
       state = 0;
-      var t14 = p3.get$x();
+      t10 = $.sub(t8, t10);
+      t8 = $.index(p2, 0);
     case 8:
       state = 0;
-      t3 = $.sub(t3, $.mul(t11, $.sub(t9, t14)));
-      var t16 = p1.get$x();
+      var t13 = $.index(p3, 0);
     case 9:
       state = 0;
-      var t18 = p3.get$x();
+      t3 = $.sub(t3, $.mul(t10, $.sub(t8, t13)));
+      var t15 = $.index(p1, 0);
     case 10:
       state = 0;
-      t18 = $.sub(t16, t18);
-      t16 = p2.get$y();
+      var t17 = $.index(p3, 0);
     case 11:
       state = 0;
-      var t21 = p3.get$y();
+      t17 = $.sub(t15, t17);
+      t15 = $.index(p2, 1);
     case 12:
       state = 0;
-      t18 = $.mul(t18, $.sub(t16, t21));
-      var t23 = p1.get$y();
+      var t20 = $.index(p3, 1);
     case 13:
       state = 0;
-      var t25 = p3.get$y();
+      t17 = $.mul(t17, $.sub(t15, t20));
+      var t22 = $.index(p1, 1);
     case 14:
       state = 0;
-      t25 = $.sub(t23, t25);
-      t23 = p2.get$x();
+      var t24 = $.index(p3, 1);
     case 15:
       state = 0;
-      var t28 = p3.get$x();
+      t24 = $.sub(t22, t24);
+      t22 = $.index(p2, 0);
     case 16:
       state = 0;
-      var alpha = $.div(t3, $.sub(t18, $.mul(t25, $.sub(t23, t28))));
-      t3 = p3.get$x();
+      var t27 = $.index(p3, 0);
     case 17:
       state = 0;
-      t3 = $.sub(t1, t3);
-      t1 = p1.get$x();
+      var alpha = $.div(t3, $.sub(t17, $.mul(t24, $.sub(t22, t27))));
+      if (0 >= p.length)
+        throw $.ioore(0);
+      t3 = p[0];
     case 18:
       state = 0;
-      var t32 = p3.get$x();
+      var t30 = $.index(p3, 0);
     case 19:
       state = 0;
-      t3 = $.sub(t3, $.mul(alpha, $.sub(t1, t32)));
-      var t34 = p2.get$x();
+      t30 = $.sub(t3, t30);
+      t3 = $.index(p1, 0);
     case 20:
       state = 0;
-      var t36 = p3.get$x();
+      var t33 = $.index(p3, 0);
     case 21:
       state = 0;
-      var beta = $.div(t3, $.sub(t34, t36));
+      t30 = $.sub(t30, $.mul(alpha, $.sub(t3, t33)));
+      var t35 = $.index(p2, 0);
+    case 22:
+      state = 0;
+      var t37 = $.index(p3, 0);
+    case 23:
+      state = 0;
+      var beta = $.div(t30, $.sub(t35, t37));
       if (typeof alpha !== 'number')
         throw $.iae(alpha);
-      t3 = 1 - alpha;
+      t30 = 1 - alpha;
       if (typeof beta !== 'number')
         throw $.iae(beta);
-      var gamma = t3 - beta;
+      var gamma = t30 - beta;
       if (typeof r1 !== 'number')
         throw $.iae(r1);
-      t3 = alpha * r1;
+      t30 = alpha * r1;
       if (typeof r2 !== 'number')
         throw $.iae(r2);
-      t3 += beta * r2;
+      t30 += beta * r2;
       if (typeof r3 !== 'number')
         throw $.iae(r3);
-      var red = $.toInt($.round(t3 + gamma * r3));
+      var red = $.toInt($.round(t30 + gamma * r3));
       if (typeof g1 !== 'number')
         throw $.iae(g1);
-      var t38 = alpha * g1;
+      var t39 = alpha * g1;
       if (typeof g2 !== 'number')
         throw $.iae(g2);
-      t38 += beta * g2;
+      t39 += beta * g2;
       if (typeof g3 !== 'number')
         throw $.iae(g3);
-      var green = $.toInt($.round(t38 + gamma * g3));
+      var green = $.toInt($.round(t39 + gamma * g3));
       if (typeof b1 !== 'number')
         throw $.iae(b1);
-      var t39 = alpha * b1;
+      var t40 = alpha * b1;
       if (typeof b2 !== 'number')
         throw $.iae(b2);
-      t39 += beta * b2;
+      t40 += beta * b2;
       if (typeof b3 !== 'number')
         throw $.iae(b3);
-      return [red, green, $.toInt($.round(t39 + gamma * b3))];
+      return [red, green, $.toInt($.round(t40 + gamma * b3))];
   }
 },
- drawSmallWiredCube$2: function(c, k) {
+ drawSmallWiredCube$1: function(c) {
   var xdiag = 40 * $.cos(0.5235987755982988);
   var ydiag = 40 * $.sin(0.5235987755982988);
   c.translate$2($.sub($.sub($.sub(c.get$canvas().get$width(), 100), 40), 20), $.sub(c.get$canvas().get$height(), 20));
-  this.drawSmallWiredCubeIntersection$5(c, k, 100, 40, 0.5235987755982988);
+  this.drawSmallWiredCubeIntersection$4(c, 100, 40, 0.5235987755982988);
   c.beginPath$0();
   c.moveTo$2(0, 0);
   c.set$strokeStyle('#F00');
@@ -1784,64 +1855,76 @@ $$.ColorCube = {"":
   c.stroke$0();
   c.translate$2($.add($.add($.add($.neg(c.get$canvas().get$width()), 100), 40), 20), $.add($.neg(c.get$canvas().get$height()), 20));
 },
- drawSmallWiredCubeIntersection$5: function(c, k, size, diagSize, angle) {
-  if ($.leB(k, 255))
-    this.drawSmallWiredCubeIntersection1$5(c, k, size, diagSize, angle);
-  else if ($.gtB(k, 255) && $.ltB(k, 510))
-    this.drawSmallWiredCubeIntersection2$5(c, k, size, diagSize, angle);
+ drawSmallWiredCubeIntersection$4: function(c, size, diagSize, angle) {
+  if ($.leB(this.k, 255))
+    this.drawSmallWiredCubeIntersection1$4(c, size, diagSize, angle);
+  else if ($.ltB(this.k, 510))
+    this.drawSmallWiredCubeIntersection2$4(c, size, diagSize, angle);
   else
-    this.drawSmallWiredCubeIntersection3$5(c, k, size, diagSize, angle);
+    this.drawSmallWiredCubeIntersection3$4(c, size, diagSize, angle);
 },
- drawSmallWiredCubeIntersection1$5: function(c, k, size, diagSize, angle) {
+ drawSmallWiredCubeIntersection1$4: function(c, size, diagSize, angle) {
   c.beginPath$0();
   var xdiag = diagSize * $.cos(angle);
   var ydiag = diagSize * $.sin(angle);
   var t1 = -size;
-  if (typeof k !== 'number')
-    throw $.iae(k);
-  c.moveTo$2(0, t1 * k / 255);
-  c.lineTo$2(size * k / 255, 0);
-  c.lineTo$2(diagSize * k / 255 * $.cos(angle), -diagSize * k / 255 * $.sin(angle));
+  var t2 = this.k;
+  if (typeof t2 !== 'number')
+    throw $.iae(t2);
+  c.moveTo$2(0, t1 * t2 / 255);
+  var t3 = this.k;
+  if (typeof t3 !== 'number')
+    throw $.iae(t3);
+  c.lineTo$2(size * t3 / 255, 0);
+  var t4 = this.k;
+  if (typeof t4 !== 'number')
+    throw $.iae(t4);
+  var t5 = diagSize * t4 / 255 * $.cos(angle);
+  var t6 = -diagSize;
+  var t7 = this.k;
+  if (typeof t7 !== 'number')
+    throw $.iae(t7);
+  c.lineTo$2(t5, t6 * t7 / 255 * $.sin(angle));
   c.closePath$0();
   c.set$fillStyle('#DDD');
   c.fill$0();
   c.stroke$0();
   c.set$fillStyle('#000');
-  c.fillRect$4(k / 255 * (size + xdiag) / 3 - 1, -k / 255 * (size + ydiag) / 3 - 1, 2, 2);
+  c.fillRect$4($.sub($.div($.mul($.div(this.k, 255), size + xdiag), 3), 1), $.sub($.div($.mul($.div($.neg(this.k), 255), size + ydiag), 3), 1), 2, 2);
 },
- drawSmallWiredCubeIntersection2$5: function(c, k, size, diagSize, angle) {
+ drawSmallWiredCubeIntersection2$4: function(c, size, diagSize, angle) {
   c.beginPath$0();
   var xdiag = diagSize * $.cos(angle);
   var ydiag = diagSize * $.sin(angle);
-  c.moveTo$2(size, $.mul($.div($.neg($.sub(k, 255)), 255), size));
-  var t1 = $.sub(k, 255);
+  c.moveTo$2(size, $.mul($.div($.neg($.sub(this.k, 255)), 255), size));
+  var t1 = $.sub(this.k, 255);
   if (typeof t1 !== 'number')
     throw $.iae(t1);
   var t2 = size * t1 / 255;
   var t3 = -size;
   c.lineTo$2(t2, t3);
-  t2 = $.sub(k, 255);
+  t2 = $.sub(this.k, 255);
   if (typeof t2 !== 'number')
     throw $.iae(t2);
   var t4 = xdiag * t2 / 255;
-  var t5 = $.sub(k, 255);
+  var t5 = $.sub(this.k, 255);
   if (typeof t5 !== 'number')
     throw $.iae(t5);
   c.lineTo$2(t4, t3 - ydiag * t5 / 255);
   t4 = -ydiag;
-  var t6 = $.sub(k, 255);
+  var t6 = $.sub(this.k, 255);
   if (typeof t6 !== 'number')
     throw $.iae(t6);
   c.lineTo$2(xdiag, t4 - size * t6 / 255);
-  var t7 = $.sub(k, 255);
+  var t7 = $.sub(this.k, 255);
   if (typeof t7 !== 'number')
     throw $.iae(t7);
   c.lineTo$2(xdiag + size * t7 / 255, t4);
-  var t8 = $.sub(k, 255);
+  var t8 = $.sub(this.k, 255);
   if (typeof t8 !== 'number')
     throw $.iae(t8);
   var t9 = size + xdiag * t8 / 255;
-  var t10 = $.sub(k, 255);
+  var t10 = $.sub(this.k, 255);
   if (typeof t10 !== 'number')
     throw $.iae(t10);
   c.lineTo$2(t9, t4 * t10 / 255);
@@ -1850,29 +1933,29 @@ $$.ColorCube = {"":
   c.fill$0();
   c.stroke$0();
   c.set$fillStyle('#000');
-  c.fillRect$4($.sub($.div($.mul($.div(k, 255), size + xdiag), 3), 1), $.sub($.div($.mul($.div($.neg(k), 255), size + ydiag), 3), 1), 2, 2);
+  c.fillRect$4($.sub($.div($.mul($.div(this.k, 255), size + xdiag), 3), 1), $.sub($.div($.mul($.div($.neg(this.k), 255), size + ydiag), 3), 1), 2, 2);
 },
- drawSmallWiredCubeIntersection3$5: function(c, k, size, diagSize, angle) {
+ drawSmallWiredCubeIntersection3$4: function(c, size, diagSize, angle) {
   c.beginPath$0();
   var xdiag = diagSize * $.cos(angle);
   var ydiag = diagSize * $.sin(angle);
   var t1 = size + xdiag;
   var t2 = -ydiag;
-  var t3 = $.mul($.div($.sub(k, 510), 255), size);
+  var t3 = $.mul($.div($.sub(this.k, 510), 255), size);
   if (typeof t3 !== 'number')
     throw $.iae(t3);
   c.moveTo$2(t1, t2 - t3);
-  var t4 = $.sub(k, 510);
+  var t4 = $.sub(this.k, 510);
   if (typeof t4 !== 'number')
     throw $.iae(t4);
   var t5 = size * t4 / 255 + xdiag;
   var t6 = -size;
   c.lineTo$2(t5, t6 - ydiag);
-  t5 = $.sub(k, 510);
+  t5 = $.sub(this.k, 510);
   if (typeof t5 !== 'number')
     throw $.iae(t5);
   var t7 = size + xdiag * t5 / 255;
-  var t8 = $.sub(k, 510);
+  var t8 = $.sub(this.k, 510);
   if (typeof t8 !== 'number')
     throw $.iae(t8);
   c.lineTo$2(t7, t6 - ydiag * t8 / 255);
@@ -1881,7 +1964,7 @@ $$.ColorCube = {"":
   c.fill$0();
   c.stroke$0();
   c.set$fillStyle('#000');
-  c.fillRect$4($.sub($.div($.mul($.div(k, 255), t1), 3), 1), $.sub($.div($.mul($.div($.neg(k), 255), size + ydiag), 3), 1), 2, 2);
+  c.fillRect$4($.sub($.div($.mul($.div(this.k, 255), t1), 3), 1), $.sub($.div($.mul($.div($.neg(this.k), 255), size + ydiag), 3), 1), 2, 2);
 },
  getColor$3: function(canvas, x, y) {
   var imgData = canvas.get$context2d().getImageData$4(0, 0, canvas.get$width(), canvas.get$height());
@@ -1911,7 +1994,7 @@ $$.ColorCube = {"":
   }
   return [red, green, blue];
 },
- pickColor$1: function(k) {
+ pickColor$0: function() {
   $.ClickHandler$(this.canvas, this.get$drawColorSample());
 },
  drawColorSample$3: function(canvas, x, y) {
@@ -1951,11 +2034,11 @@ $$.ColorCube = {"":
   var context = this.canvas.get$context2d();
   var slider = $.query('#slider');
   this.k = $.int_parse(slider.get$value());
-  this.init$1(this.k);
-  this.draw$2(context, this.k);
-  this.drawSmallWiredCube$2(context, this.k);
+  this.init1$0();
+  this.pickColor$0();
+  this.draw$1(context);
+  this.drawSmallWiredCube$1(context);
   slider.get$on().get$change().add$2(new $.anon(this, context, slider), true);
-  this.pickColor$1(this.k);
 }
 };
 
@@ -2857,10 +2940,33 @@ $$.anon = {"":
   t2.set$k(t1);
   t1 = $.S(t2.get$k());
   $.query('#sliderValue').set$text(t1);
-  t2.init$1(t2.get$k());
   t1 = this.context_1;
-  t2.draw$2(t1, t2.get$k());
-  t2.drawSmallWiredCube$2(t1, t2.get$k());
+  t2.draw$1(t1);
+  t2.drawSmallWiredCube$1(t1);
+}
+};
+
+$$.invokeClosure_anon = {"":
+ ["closure_0"],
+ "super": "Closure",
+ call$0: function() {
+  return this.closure_0.call$0();
+}
+};
+
+$$.invokeClosure_anon0 = {"":
+ ["closure_2", "arg1_1"],
+ "super": "Closure",
+ call$0: function() {
+  return this.closure_2.call$1(this.arg1_1);
+}
+};
+
+$$.invokeClosure_anon1 = {"":
+ ["closure_5", "arg1_4", "arg2_3"],
+ "super": "Closure",
+ call$0: function() {
+  return this.closure_5.call$2(this.arg1_4, this.arg2_3);
 }
 };
 
@@ -3095,6 +3201,22 @@ $$._convertNativeToDart_IDBKey_containsDate = {"":
 }
 };
 
+$$.ColorCube_drawColorTriangle_anon = {"":
+ [],
+ "super": "Closure",
+ call$2: function(u, v) {
+  return $.ge(u, v);
+}
+};
+
+$$.ColorCube_drawColorTriangle_anon0 = {"":
+ [],
+ "super": "Closure",
+ call$2: function(u, v) {
+  return $.le(u, v);
+}
+};
+
 $$.anon0 = {"":
  ["this_0"],
  "super": "Closure",
@@ -3122,35 +3244,11 @@ $$._ElementImpl_rect_anon = {"":
 }
 };
 
-$$.invokeClosure_anon = {"":
- ["closure_0"],
- "super": "Closure",
- call$0: function() {
-  return this.closure_0.call$0();
-}
-};
-
-$$.invokeClosure_anon0 = {"":
- ["closure_2", "arg1_1"],
- "super": "Closure",
- call$0: function() {
-  return this.closure_2.call$1(this.arg1_1);
-}
-};
-
-$$.invokeClosure_anon1 = {"":
- ["closure_5", "arg1_4", "arg2_3"],
- "super": "Closure",
- call$0: function() {
-  return this.closure_5.call$2(this.arg1_4, this.arg2_3);
-}
-};
-
 $$._MutationObserverImpl_observe_anon = {"":
  ["parsedOptions_0"],
  "super": "Closure",
  call$2: function(k, v) {
-  if ($.CTC17.containsKey$1(k) === true)
+  if ($.CTC18.containsKey$1(k) === true)
     this.parsedOptions_0[k] = true === v;
   else if ($.eqB(k, 'attributeFilter'))
     this.parsedOptions_0[k] = v;
@@ -3181,22 +3279,6 @@ $$._DocumentFragmentImpl_rect_anon = {"":
  "super": "Closure",
  call$0: function() {
   return $.CTC20;
-}
-};
-
-$$.ColorCube_drawColorTriangle_anon = {"":
- [],
- "super": "Closure",
- call$2: function(u, v) {
-  return $.ge(u, v);
-}
-};
-
-$$.ColorCube_drawColorTriangle_anon0 = {"":
- [],
- "super": "Closure",
- call$2: function(u, v) {
-  return $.le(u, v);
 }
 };
 
@@ -3379,39 +3461,13 @@ $._MeasurementScheduler__MeasurementScheduler$best = function(callback) {
   return $._PostMessageScheduler$(callback);
 };
 
-$._IDBTransactionEventsImpl$ = function(_ptr) {
-  return new $._IDBTransactionEventsImpl(_ptr);
-};
-
-$.dynamicFunction = function(name$) {
-  var f = Object.prototype[name$];
-  if (!(f == null) && !!f.methods)
-    return f.methods;
-  var methods = {};
-  var dartMethod = Object.getPrototypeOf($.CTC22)[name$];
-  if (!(dartMethod == null))
-    $.propertySet(methods, 'Object', dartMethod);
-  var bind = function() {return $.dynamicBind.call$4(this, name$, methods, Array.prototype.slice.call(arguments));};
-  bind.methods = methods;
-  $.defineProperty(Object.prototype, name$, bind);
-  return methods;
-};
-
 $.Collections_forEach = function(iterable, f) {
   for (var t1 = $.iterator(iterable); t1.hasNext$0() === true;)
     f.call$1(t1.next$0());
 };
 
-$._EventSourceEventsImpl$ = function(_ptr) {
-  return new $._EventSourceEventsImpl(_ptr);
-};
-
-$._convertNativeToDart_AcceptStructuredClone = function(object, mustCopy) {
-  var values = [];
-  var copies = [];
-  var t1 = new $._convertNativeToDart_AcceptStructuredClone_findSlot(copies, values);
-  var t2 = new $._convertNativeToDart_AcceptStructuredClone_readSlot(copies);
-  return new $._convertNativeToDart_AcceptStructuredClone_walk(new $._convertNativeToDart_AcceptStructuredClone_writeSlot(copies), mustCopy, t1, t2).call$1(object);
+$._IDBTransactionEventsImpl$ = function(_ptr) {
+  return new $._IDBTransactionEventsImpl(_ptr);
 };
 
 $.buildDynamicMetadata = function(inputTable) {
@@ -3430,6 +3486,32 @@ $.buildDynamicMetadata = function(inputTable) {
     result.push($.MetaInfo$(tag, tags, set));
   }
   return result;
+};
+
+$.dynamicFunction = function(name$) {
+  var f = Object.prototype[name$];
+  if (!(f == null) && !!f.methods)
+    return f.methods;
+  var methods = {};
+  var dartMethod = Object.getPrototypeOf($.CTC22)[name$];
+  if (!(dartMethod == null))
+    $.propertySet(methods, 'Object', dartMethod);
+  var bind = function() {return $.dynamicBind.call$4(this, name$, methods, Array.prototype.slice.call(arguments));};
+  bind.methods = methods;
+  $.defineProperty(Object.prototype, name$, bind);
+  return methods;
+};
+
+$._EventSourceEventsImpl$ = function(_ptr) {
+  return new $._EventSourceEventsImpl(_ptr);
+};
+
+$._convertNativeToDart_AcceptStructuredClone = function(object, mustCopy) {
+  var values = [];
+  var copies = [];
+  var t1 = new $._convertNativeToDart_AcceptStructuredClone_findSlot(copies, values);
+  var t2 = new $._convertNativeToDart_AcceptStructuredClone_readSlot(copies);
+  return new $._convertNativeToDart_AcceptStructuredClone_walk(new $._convertNativeToDart_AcceptStructuredClone_writeSlot(copies), mustCopy, t1, t2).call$1(object);
 };
 
 $._Collections_forEach = function(iterable, f) {
@@ -3616,6 +3698,10 @@ $._RTCPeerConnectionEventsImpl$ = function(_ptr) {
   return new $._RTCPeerConnectionEventsImpl(_ptr);
 };
 
+$._BodyElementEventsImpl$ = function(_ptr) {
+  return new $._BodyElementEventsImpl(_ptr);
+};
+
 $.StringBuffer_StringBuffer = function(content$) {
   return $.StringBufferImpl$(content$);
 };
@@ -3656,10 +3742,6 @@ $.get$length = function(receiver) {
     return receiver.length;
   else
     return receiver.get$length();
-};
-
-$._BodyElementEventsImpl$ = function(_ptr) {
-  return new $._BodyElementEventsImpl(_ptr);
 };
 
 $._TypedImageData$ = function(data, height, width) {
@@ -3771,12 +3853,15 @@ $.invokeClosure = function(closure, isolate, numberOfArguments, arg1, arg2) {
     throw $.$$throw($.ExceptionImplementation$('Unsupported number of arguments for wrapped closure'));
 };
 
-$._ElementRectImpl$ = function(element) {
-  return new $._ElementRectImpl($._SimpleClientRect$(element.get$clientLeft(), element.get$clientTop(), element.get$clientWidth(), element.get$clientHeight()), $._SimpleClientRect$(element.get$offsetLeft(), element.get$offsetTop(), element.get$offsetWidth(), element.get$offsetHeight()), $._SimpleClientRect$(element.get$scrollLeft(), element.get$scrollTop(), element.get$scrollWidth(), element.get$scrollHeight()), element.getBoundingClientRect$0(), element.getClientRects$0());
-};
-
 $.MetaInfo$ = function(_tag, _tags, _set) {
   return new $.MetaInfo(_tag, _tags, _set);
+};
+
+$.addLast = function(receiver, value) {
+  if (!$.isJsArray(receiver))
+    return receiver.addLast$1(value);
+  $.checkGrowable(receiver, 'addLast');
+  receiver.push(value);
 };
 
 $._HttpRequestEventsImpl$ = function(_ptr) {
@@ -3796,18 +3881,12 @@ $.ioore = function(index) {
   throw $.$$throw($.IndexOutOfRangeException$(index));
 };
 
-$._isJavaScriptSimpleObject = function(value) {
-  return Object.getPrototypeOf(value) === Object.prototype;
-};
-
 $._ChildNodeListLazy$ = function(_this) {
   return new $._ChildNodeListLazy(_this);
 };
 
-$._MutationObserverScheduler$ = function(callback) {
-  var t1 = new $._MutationObserverScheduler(null, null, false, callback);
-  t1._MutationObserverScheduler$1(callback);
-  return t1;
+$._ElementRectImpl$ = function(element) {
+  return new $._ElementRectImpl($._SimpleClientRect$(element.get$clientLeft(), element.get$clientTop(), element.get$clientWidth(), element.get$clientHeight()), $._SimpleClientRect$(element.get$offsetLeft(), element.get$offsetTop(), element.get$offsetWidth(), element.get$offsetHeight()), $._SimpleClientRect$(element.get$scrollLeft(), element.get$scrollTop(), element.get$scrollWidth(), element.get$scrollHeight()), element.getBoundingClientRect$0(), element.getClientRects$0());
 };
 
 $.Primitives_printString = function(string) {
@@ -3829,8 +3908,16 @@ $.Primitives_printString = function(string) {
 
 $._convertNativeToDart_IDBKey = function(nativeKey) {
   if (new $._convertNativeToDart_IDBKey_containsDate().call$1(nativeKey) === true)
-    throw $.$$throw($.CTC16);
+    throw $.$$throw($.CTC17);
   return nativeKey;
+};
+
+$._isJavaScriptSimpleObject = function(value) {
+  return Object.getPrototypeOf(value) === Object.prototype;
+};
+
+$.leB = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b) === true;
 };
 
 $._IDBRequestEventsImpl$ = function(_ptr) {
@@ -3867,10 +3954,6 @@ $.ExceptionImplementation$ = function(message) {
   return new $.ExceptionImplementation(message);
 };
 
-$._DOMWindowCrossFrameImpl$ = function(_window) {
-  return new $._DOMWindowCrossFrameImpl(_window);
-};
-
 $._WorkerEventsImpl$ = function(_ptr) {
   return new $._WorkerEventsImpl(_ptr);
 };
@@ -3881,8 +3964,14 @@ $.sub$slow = function(a, b) {
   return a.operator$sub$1(b);
 };
 
-$.leB = function(a, b) {
-  return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b) === true;
+$._DOMWindowCrossFrameImpl$ = function(_window) {
+  return new $._DOMWindowCrossFrameImpl(_window);
+};
+
+$._MutationObserverScheduler$ = function(callback) {
+  var t1 = new $._MutationObserverScheduler(null, null, false, callback);
+  t1._MutationObserverScheduler$1(callback);
+  return t1;
 };
 
 $.Collections_collectionToString = function(c) {
@@ -3905,6 +3994,22 @@ $.indexOf$2 = function(receiver, element, start) {
     return receiver.indexOf(element, start);
   }
   return receiver.indexOf$2(element, start);
+};
+
+$._maybeScheduleMeasurementFrame = function() {
+  if ($._measurementScheduler == null)
+    $._measurementScheduler = $._MeasurementScheduler__MeasurementScheduler$best($._completeMeasurementFutures);
+  $._measurementScheduler.maybeSchedule$0();
+};
+
+$.removeLast = function(receiver) {
+  if ($.isJsArray(receiver)) {
+    $.checkGrowable(receiver, 'removeLast');
+    if ($.get$length(receiver) === 0)
+      throw $.$$throw($.IndexOutOfRangeException$(-1));
+    return receiver.pop();
+  }
+  return receiver.removeLast$0();
 };
 
 $.typeNameInIE = function(obj) {
@@ -3965,10 +4070,10 @@ $.ge = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a >= b : $.ge$slow(a, b);
 };
 
-$._maybeScheduleMeasurementFrame = function() {
-  if ($._measurementScheduler == null)
-    $._measurementScheduler = $._MeasurementScheduler__MeasurementScheduler$best($._completeMeasurementFutures);
-  $._measurementScheduler.maybeSchedule$0();
+$._convertDartToNative_ImageData = function(imageData) {
+  if (typeof imageData === 'object' && imageData !== null && imageData.is$_ImageDataImpl())
+    return imageData;
+  return {data: imageData.get$data(), height: imageData.get$height(), width: imageData.get$width()};
 };
 
 $.substring$2 = function(receiver, startIndex, endIndex) {
@@ -3984,16 +4089,6 @@ $.substring$2 = function(receiver, startIndex, endIndex) {
   if ($.gtB(endIndex, length$))
     throw $.$$throw($.IndexOutOfRangeException$(endIndex));
   return $.substringUnchecked(receiver, startIndex, endIndex);
-};
-
-$.removeLast = function(receiver) {
-  if ($.isJsArray(receiver)) {
-    $.checkGrowable(receiver, 'removeLast');
-    if ($.get$length(receiver) === 0)
-      throw $.$$throw($.IndexOutOfRangeException$(-1));
-    return receiver.pop();
-  }
-  return receiver.removeLast$0();
 };
 
 $.StringBufferImpl$ = function(content$) {
@@ -4018,19 +4113,6 @@ $.HashMapImplementation$ = function() {
   var t1 = new $.HashMapImplementation(null, null, null, null, null);
   t1.HashMapImplementation$0();
   return t1;
-};
-
-$.addLast = function(receiver, value) {
-  if (!$.isJsArray(receiver))
-    return receiver.addLast$1(value);
-  $.checkGrowable(receiver, 'addLast');
-  receiver.push(value);
-};
-
-$._convertDartToNative_ImageData = function(imageData) {
-  if (typeof imageData === 'object' && imageData !== null && imageData.is$_ImageDataImpl())
-    return imageData;
-  return {data: imageData.get$data(), height: imageData.get$height(), width: imageData.get$width()};
 };
 
 $._SVGElementInstanceEventsImpl$ = function(_ptr) {
@@ -4094,16 +4176,20 @@ $.CompleterImpl$ = function() {
   return new $.CompleterImpl($.FutureImpl$());
 };
 
-$.HashMapImplementation__computeLoadLimit = function(capacity) {
-  return $.tdiv(capacity * 3, 4);
-};
-
 $.DivElement_DivElement = function() {
   return $._Elements_createDivElement();
 };
 
+$.HashMapImplementation__computeLoadLimit = function(capacity) {
+  return $.tdiv(capacity * 3, 4);
+};
+
 $.NoMoreElementsException$ = function() {
   return new $.NoMoreElementsException();
+};
+
+$._EventListenerListImpl$ = function(_ptr, _type) {
+  return new $._EventListenerListImpl(_ptr, _type);
 };
 
 $.gt$slow = function(a, b) {
@@ -4114,10 +4200,6 @@ $.gt$slow = function(a, b) {
 
 $.iae = function(argument) {
   throw $.$$throw($.ArgumentError$(argument));
-};
-
-$._EventListenerListImpl$ = function(_ptr, _type) {
-  return new $._EventListenerListImpl(_ptr, _type);
 };
 
 $._DOMApplicationCacheEventsImpl$ = function(_ptr) {
@@ -4172,6 +4254,10 @@ $.toRadixString = function(receiver, radix) {
   return receiver.toString(radix);
 };
 
+$._FrameSetElementEventsImpl$ = function(_ptr) {
+  return new $._FrameSetElementEventsImpl(_ptr);
+};
+
 $.StringImplementation__toJsStringArray = function(strings) {
   if (typeof strings !== 'object' || strings === null || (strings.constructor !== Array || !!strings.immutable$list) && !strings.is$JavaScriptIndexingBehavior())
     return $.StringImplementation__toJsStringArray$bailout(1, strings);
@@ -4200,10 +4286,6 @@ $.StringImplementation__toJsStringArray = function(strings) {
     }
   }
   return array;
-};
-
-$._FrameSetElementEventsImpl$ = function(_ptr) {
-  return new $._FrameSetElementEventsImpl(_ptr);
 };
 
 $.IllegalJSRegExpException$ = function(_pattern, _errmsg) {
@@ -4334,19 +4416,19 @@ $.S = function(value) {
   return res;
 };
 
+$.replaceAll = function(receiver, from, to) {
+  if (!(typeof receiver === 'string'))
+    return receiver.replaceAll$2(from, to);
+  $.checkString(to);
+  return $.stringReplaceAllUnchecked(receiver, from, to);
+};
+
 $.checkString = function(value) {
   if (!(typeof value === 'string')) {
     $.checkNull(value);
     throw $.$$throw($.ArgumentError$(value));
   }
   return value;
-};
-
-$.replaceAll = function(receiver, from, to) {
-  if (!(typeof receiver === 'string'))
-    return receiver.replaceAll$2(from, to);
-  $.checkString(to);
-  return $.stringReplaceAllUnchecked(receiver, from, to);
 };
 
 $._DoubleLinkedQueueIterator$ = function(_sentinel) {
@@ -4448,6 +4530,17 @@ $._TextTrackCueEventsImpl$ = function(_ptr) {
   return new $._TextTrackCueEventsImpl(_ptr);
 };
 
+$.typeNameInSafari = function(obj) {
+  var name$ = $.constructorNameFallback(obj);
+  if (name$ === 'Window')
+    return 'DOMWindow';
+  if (name$ === 'CanvasPixelArray')
+    return 'Uint8ClampedArray';
+  if (name$ === 'WebKitMutationObserver')
+    return 'MutationObserver';
+  return name$;
+};
+
 $.add = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a + b : $.add$slow(a, b);
 };
@@ -4476,17 +4569,6 @@ $._WorkerContextEventsImpl$ = function(_ptr) {
 
 $._ElementEventsImpl$ = function(_ptr) {
   return new $._ElementEventsImpl(_ptr);
-};
-
-$.typeNameInSafari = function(obj) {
-  var name$ = $.constructorNameFallback(obj);
-  if (name$ === 'Window')
-    return 'DOMWindow';
-  if (name$ === 'CanvasPixelArray')
-    return 'Uint8ClampedArray';
-  if (name$ === 'WebKitMutationObserver')
-    return 'MutationObserver';
-  return name$;
 };
 
 $._dynamicMetadata = function(table) {
@@ -4681,10 +4763,6 @@ $.checkMutable = function(list, reason) {
     throw $.$$throw($.UnsupportedOperationException$(reason));
 };
 
-$.sqrt = function(x) {
-  return Math.sqrt($.checkNum(x));
-};
-
 $.checkGrowable = function(list, reason) {
   if (!!(list.fixed$length))
     throw $.$$throw($.UnsupportedOperationException$(reason));
@@ -4692,6 +4770,10 @@ $.checkGrowable = function(list, reason) {
 
 $.le = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b);
+};
+
+$.sqrt = function(x) {
+  return Math.sqrt($.checkNum(x));
 };
 
 $.JSSyntaxRegExp$ = function(pattern, ignoreCase, multiLine) {
@@ -4711,6 +4793,12 @@ $.IndexOutOfRangeException$ = function(_value) {
   return new $.IndexOutOfRangeException(_value);
 };
 
+$.le$slow = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return a <= b;
+  return a.operator$le$1(b);
+};
+
 $.KeyValuePair$ = function(key, value) {
   return new $.KeyValuePair(key, value);
 };
@@ -4724,12 +4812,6 @@ $.typeNameInOpera = function(obj) {
   if (name$ === 'Window')
     return 'DOMWindow';
   return name$;
-};
-
-$.le$slow = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return a <= b;
-  return a.operator$le$1(b);
 };
 
 $.hashCodeForNativeObject = function(object) {
@@ -4806,6 +4888,10 @@ $.stringContainsUnchecked = function(receiver, other, startIndex) {
   return !($.indexOf$2(receiver, other, startIndex) === -1);
 };
 
+$.Primitives_objectToString = function(object) {
+  return 'Instance of \'' + $.S($.Primitives_objectTypeName(object)) + '\'';
+};
+
 $.shl = function(a, b) {
   if ($.checkNumbers(a, b)) {
     if (b < 0)
@@ -4815,10 +4901,6 @@ $.shl = function(a, b) {
     return (a << b) >>> 0;
   }
   return a.operator$shl$1(b);
-};
-
-$.Primitives_objectToString = function(object) {
-  return 'Instance of \'' + $.S($.Primitives_objectTypeName(object)) + '\'';
 };
 
 $.defineProperty = function(obj, property, value) {
@@ -4917,22 +4999,22 @@ $.StringImplementation__toJsStringArray$bailout = function(state, strings) {
 
 $.dynamicBind.call$4 = $.dynamicBind;
 $.dynamicBind.$name = "dynamicBind";
-$.typeNameInFirefox.call$1 = $.typeNameInFirefox;
-$.typeNameInFirefox.$name = "typeNameInFirefox";
 $.toStringWrapper.call$0 = $.toStringWrapper;
 $.toStringWrapper.$name = "toStringWrapper";
 $._completeMeasurementFutures.call$0 = $._completeMeasurementFutures;
 $._completeMeasurementFutures.$name = "_completeMeasurementFutures";
+$.typeNameInFirefox.call$1 = $.typeNameInFirefox;
+$.typeNameInFirefox.$name = "typeNameInFirefox";
 $.typeNameInSafari.call$1 = $.typeNameInSafari;
 $.typeNameInSafari.$name = "typeNameInSafari";
-$.constructorNameFallback.call$1 = $.constructorNameFallback;
-$.constructorNameFallback.$name = "constructorNameFallback";
 $.typeNameInChrome.call$1 = $.typeNameInChrome;
 $.typeNameInChrome.$name = "typeNameInChrome";
 $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
 $.invokeClosure.call$5 = $.invokeClosure;
 $.invokeClosure.$name = "invokeClosure";
+$.constructorNameFallback.call$1 = $.constructorNameFallback;
+$.constructorNameFallback.$name = "constructorNameFallback";
 $.typeNameInOpera.call$1 = $.typeNameInOpera;
 $.typeNameInOpera.$name = "typeNameInOpera";
 Isolate.$finishClasses($$);
@@ -4951,7 +5033,7 @@ $.CTC27 = 'attributeOldValue';
 $.CTC28 = 'characterDataOldValue';
 $.CTC29 = Isolate.makeConstantList(['childList', 'attributes', 'characterData', 'subtree', 'attributeOldValue', 'characterDataOldValue']);
 $.CTC30 = true;
-$.CTC17 = new Isolate.$isolateProperties.ConstantMap(6, {'childList': true, 'attributes': true, 'characterData': true, 'subtree': true, 'attributeOldValue': true, 'characterDataOldValue': true}, Isolate.$isolateProperties.CTC29);
+$.CTC18 = new Isolate.$isolateProperties.ConstantMap(6, {'childList': true, 'attributes': true, 'characterData': true, 'subtree': true, 'attributeOldValue': true, 'characterDataOldValue': true}, Isolate.$isolateProperties.CTC29);
 $.CTC31 = 'structured clone of ArrayBufferView';
 $.CTC9 = new Isolate.$isolateProperties.NotImplementedException('structured clone of ArrayBufferView');
 $.CTC21 = new Isolate.$isolateProperties.ConstantMap(0, {}, Isolate.$isolateProperties.CTC1);
@@ -4960,18 +5042,18 @@ $.CTC33 = false;
 $.CTC = new Isolate.$isolateProperties.JSSyntaxRegExp('^#[_a-zA-Z]\\w*$', false, false);
 $.CTC34 = 'structured clone of ArrayBuffer';
 $.CTC8 = new Isolate.$isolateProperties.NotImplementedException('structured clone of ArrayBuffer');
-$.CTC14 = new Isolate.$isolateProperties._DeletedKeySentinel();
+$.CTC15 = new Isolate.$isolateProperties._DeletedKeySentinel();
 $.CTC35 = 'structured clone of Date';
 $.CTC3 = new Isolate.$isolateProperties.NotImplementedException('structured clone of Date');
 $.CTC22 = new Isolate.$isolateProperties.Object();
 $.CTC36 = 'Cannot add to immutable List.';
 $.CTC2 = new Isolate.$isolateProperties.UnsupportedOperationException('Cannot add to immutable List.');
 $.CTC37 = 'IDBKey containing Date';
-$.CTC16 = new Isolate.$isolateProperties.NotImplementedException('IDBKey containing Date');
+$.CTC17 = new Isolate.$isolateProperties.NotImplementedException('IDBKey containing Date');
 $.CTC38 = '[-[\\]{}()*+?.,\\\\^$|#\\s]';
 $.CTC13 = new Isolate.$isolateProperties.JSSyntaxRegExp('[-[\\]{}()*+?.,\\\\^$|#\\s]', false, false);
 $.CTC39 = 'Incorrect number or type of arguments';
-$.CTC19 = new Isolate.$isolateProperties.ExceptionImplementation('Incorrect number or type of arguments');
+$.CTC14 = new Isolate.$isolateProperties.ExceptionImplementation('Incorrect number or type of arguments');
 $.CTC40 = 0;
 $.CTC41 = new Isolate.$isolateProperties._SimpleClientRect(0, 0, 0, 0);
 $.CTC20 = new Isolate.$isolateProperties.EmptyElementRect(Isolate.$isolateProperties.CTC41, Isolate.$isolateProperties.CTC41, Isolate.$isolateProperties.CTC41, Isolate.$isolateProperties.CTC41, Isolate.$isolateProperties.CTC1);
@@ -4979,7 +5061,7 @@ $.CTC42 = 'structured clone of Blob';
 $.CTC6 = new Isolate.$isolateProperties.NotImplementedException('structured clone of Blob');
 $.CTC43 = 'structured clone of RegExp';
 $.CTC4 = new Isolate.$isolateProperties.NotImplementedException('structured clone of RegExp');
-$.CTC18 = new Isolate.$isolateProperties.IllegalAccessException();
+$.CTC19 = new Isolate.$isolateProperties.IllegalAccessException();
 $.CTC44 = 'structured clone of File';
 $.CTC5 = new Isolate.$isolateProperties.NotImplementedException('structured clone of File');
 $.CTC45 = 'structured clone of other type';
@@ -4989,10 +5071,10 @@ $.CTC7 = new Isolate.$isolateProperties.NotImplementedException('structured clon
 $.CTC47 = null;
 $.CTC0 = new Isolate.$isolateProperties.NullPointerException(null, Isolate.$isolateProperties.CTC1);
 $.CTC11 = new Isolate.$isolateProperties.NoMoreElementsException();
-$.CTC15 = new Isolate.$isolateProperties.EmptyQueueException();
+$.CTC16 = new Isolate.$isolateProperties.EmptyQueueException();
 $.CTC48 = 'Cannot removeLast on immutable List.';
 $.CTC12 = new Isolate.$isolateProperties.UnsupportedOperationException('Cannot removeLast on immutable List.');
-$.HashMapImplementation__DELETED_KEY = Isolate.$isolateProperties.CTC14;
+$.HashMapImplementation__DELETED_KEY = Isolate.$isolateProperties.CTC15;
 $._pendingMeasurementFrameCallbacks = null;
 $.PI = 3.141592653589793;
 $.Primitives_hashCodeSeed = 0;
@@ -5288,7 +5370,7 @@ $.$defineNativeClass('CanvasRenderingContext2D', ["fillStyle!", "font!", "stroke
     t1 = false;
   if (t1)
     return $._convertNativeToDart_ImageData(this._createImageData_2$2(imagedata_OR_sw, sh));
-  throw $.$$throw($.CTC19);
+  throw $.$$throw($.CTC14);
 },
  _createImageData_1$1: function(imagedata) {
   return this.createImageData(imagedata);
@@ -5351,7 +5433,7 @@ $.$defineNativeClass('CanvasRenderingContext2D', ["fillStyle!", "font!", "stroke
     this._putImageData_2$7($._convertDartToNative_ImageData(imagedata), dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
     return;
   }
-  throw $.$$throw($.CTC19);
+  throw $.$$throw($.CTC14);
 },
  putImageData$3: function(imagedata,dx,dy) {
   return this.putImageData$7(imagedata,dx,dy,$,$,$,$)
@@ -6379,7 +6461,7 @@ return this.top;
     this._postMessage_2$3($._convertDartToNative_SerializedScriptValue(message), targetOrigin, messagePorts);
     return;
   }
-  throw $.$$throw($.CTC19);
+  throw $.$$throw($.CTC14);
 },
  postMessage$2: function(message,targetOrigin) {
   return this.postMessage$3(message,targetOrigin,$)

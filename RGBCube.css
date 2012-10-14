@@ -22,9 +22,7 @@ p {
 }
 
 #text {
-  font-size: 24pt;
-  text-align: center;
-  margin-top: 140px;
+  font-size: 16pt;
 }
 
 #canvas {

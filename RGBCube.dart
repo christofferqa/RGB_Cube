@@ -44,32 +44,33 @@ class ColorCube {
 
     InputElement slider = query('#slider');
     k = int.parse(slider.value);
+    init1();
+    pickColor();
 
-    init(k);
-
-    draw(context, k);
-    drawSmallWiredCube(context, k);
+    draw(context);
+    drawSmallWiredCube(context);
 
     slider.on.change.add((Event e) {
       k = int.parse(slider.value);
       query('#sliderValue').text = "$k";
-      init(k);
-      draw(context, k);
-      drawSmallWiredCube(context, k);
+      draw(context);
+      drawSmallWiredCube(context);
     }, true);
 
-    pickColor(k);
   }
 
-  void draw(CanvasRenderingContext2D c, int k){
+  void draw(CanvasRenderingContext2D c){
     if (k <= 255){
-      draw1(c, k);
+      init1();
+      draw1(c);
     }
     if (k > 255 && k <510) {
-      draw2(c, k);
+      init2();
+      draw2(c);
     }
     if (k >= 510) {
-      draw3(c, k);
+      init3();
+      draw3(c);
     }
 
   }
@@ -83,8 +84,8 @@ class ColorCube {
    * To draw a complete triangle set [ymax] = [p3.y].
    * To truncate the triangle, set [ymax] < [p3.y] (if [orientation] is true).
    */
-  void drawColorTriangle(ImageData imgData, int a,
-                         Point p1, Point p2, Point p3,
+  void drawColorTriangle(ImageData imgData,
+                         List p1, List p2, List p3,
                          List A, List B, List C,
                          var ymax,
                          bool orientation){
@@ -98,13 +99,13 @@ class ColorCube {
       compare = (var u, var v) => u <= v;
     }
     var color, p;
-    var x1 = p1.x;
-    var x2 = p2.x;
-    var y = p1.y;
+    var x1 = p1[0];
+    var x2 = p2[0];
+    var y = p1[1];
     var d = 0.134; // ~1-sqrt(3)/2
     while (compare(y, ymax)) {
       for (var x=x1; x<=x2; x++){
-        p = new Point(x,y);
+        p = [x,y];
         color = colorAtPoint(p, p1, p2, p3,
             A[0], A[1], A[2],
             B[0], B[1], B[2],
@@ -127,80 +128,76 @@ class ColorCube {
     }
   }
 
-  canvasCoordPoint(var x, var y){
-    return new Point((x + size~/2).round().toInt(), (size~/2-y).round().toInt());
-  }
 
-  void init(var a){
-//------------------------------------------
 ///      C
 ///     /\
 ///    /__\
 ///  B      A
-    A1 = [a, 0, 0];
-    B1 = [0, a, 0];
-    C1 = [0, 0, a];
+  void init1(){
+    A1 = [k, 0, 0];
+    B1 = [0, k, 0];
+    C1 = [0, 0, k];
 
-    pB1 = canvasCoordPoint(-a/SQRT2,-a/(SQRT2*SQRT3));
-    pA1 = canvasCoordPoint(a/SQRT2,-a/(SQRT2*SQRT3));
-    pC1 = canvasCoordPoint(0,a*SQRT2/SQRT3);
-//------------------------------------------
+    pB1 = canvasCoord(-k/SQRT2,-k/(SQRT2*SQRT3));
+    pA1 = canvasCoord(k/SQRT2,-k/(SQRT2*SQRT3));
+    pC1 = canvasCoord(0,k*SQRT2/SQRT3);
+    } 
+
 ///     M
 ///   C __ B
 ///  D /  \ A
 ///    \__/
 ///   E    F
 ///     N
+///
+/// M and N are fictive points so that triangles AMD and AND are equilateral
+  void init2(){
+    A2 = [255, 0, k-255];
+    D2 = [0, 255, k-255];
+    M2 = [0, 0, k];
+    N2 = [255, 255, k-510];
 
-// M and N are fictive points so that triangles AMD and AND are equilateral
+    pA2 = canvasCoord(255/SQRT2, SQRT2/SQRT3*k-SQRT3/SQRT2*255);
+    pB2 = canvasCoord(SQRT1_2*(k-255), SQRT3/SQRT2*(255-k/3));
+    pD2 = canvasCoord(-255/SQRT2, SQRT2/SQRT3*k-SQRT3/SQRT2*255);
+    pE2 = canvasCoord(k/SQRT2-255*SQRT2, -k/(SQRT2*SQRT3));
+    pM2 = canvasCoord(0, SQRT2*SQRT3*k/3);
+    pN2 = canvasCoord(0, SQRT2*SQRT3*(k/3-255));
+    } 
 
-    A2 = [255, 0, a-255];
-    D2 = [0, 255, a-255];
-    M2 = [0, 0, a];
-    N2 = [255, 255, a-510];
-
-    pA2 = canvasCoordPoint(255/SQRT2, SQRT2/SQRT3*a-SQRT3/SQRT2*255);
-    pB2 = canvasCoordPoint(SQRT1_2*(a-255), SQRT3/SQRT2*(255-a/3));
-    pD2 = canvasCoordPoint(-255/SQRT2, SQRT2/SQRT3*a-SQRT3/SQRT2*255);
-    pE2 = canvasCoordPoint(a/SQRT2-255*SQRT2, -a/(SQRT2*SQRT3));
-    pM2 = canvasCoordPoint(0, SQRT2*SQRT3*a/3);
-    pN2 = canvasCoordPoint(0, SQRT2*SQRT3*(a/3-255));
-
-// -----------------------------------------
 ///  B __ A
 ///   \  /
 ///    \/
 ///    C
+  void init3(){
+    C3 = [255, 255, k-510];
+    A3 = [255, k-510, 255];
+    B3 = [k-510, 255, 255];
 
-    C3 = [255, 255, a-510];
-    A3 = [255, a-510, 255];
-    B3 = [a-510, 255, 255];
+    pC3 = canvasCoord(0,-(765-k)*SQRT2/SQRT3);
+    pA3 = canvasCoord((765-k)/SQRT2, (765-k)/(SQRT2*SQRT3));
+    pB3 = canvasCoord(-(765-k)/SQRT2, (765-k)/(SQRT2*SQRT3));
+    }
 
-    pC3 = canvasCoordPoint(0,-(765-a)*SQRT2/SQRT3);
-    pA3 = canvasCoordPoint((765-a)/SQRT2, (765-a)/(SQRT2*SQRT3));
-    pB3 = canvasCoordPoint(-(765-a)/SQRT2, (765-a)/(SQRT2*SQRT3));
-
-  }
-
-  void draw1(CanvasRenderingContext2D c, int a){
+  void draw1(CanvasRenderingContext2D c){
     c.clearRect(0, 0, size, size);
     var imgData = c.createImageData(size, size);
-    drawColorTriangle(imgData, a, pB1, pA1, pC1, B1, A1, C1, pC1.y, true);
+    drawColorTriangle(imgData, pB1, pA1, pC1, B1, A1, C1, pC1[1], true);
     c.putImageData(imgData, 0, 0);
   }
 
-  void draw2(CanvasRenderingContext2D ctx, int a){
+  void draw2(CanvasRenderingContext2D ctx){
     ctx.clearRect(0, 0, size, size);
     var imgData = ctx.createImageData(size, size);
-    drawColorTriangle(imgData, a, pD2, pA2, pM2, D2, A2, M2, pB2.y, true);
-    drawColorTriangle(imgData, a, pD2, pA2, pN2, D2, A2, N2, pE2.y, false);
+    drawColorTriangle(imgData, pD2, pA2, pM2, D2, A2, M2, pB2[1], true);
+    drawColorTriangle(imgData, pD2, pA2, pN2, D2, A2, N2, pE2[1], false);
     ctx.putImageData(imgData, 0, 0);
   }
 
-  void draw3(CanvasRenderingContext2D c, int a){
+  void draw3(CanvasRenderingContext2D c){
     c.clearRect(0, 0, size, size);
     var imgData = c.createImageData(size, size);
-    drawColorTriangle(imgData, a, pB3, pA3, pC3, B3, A3, C3, pC3.y, false);
+    drawColorTriangle(imgData, pB3, pA3, pC3, B3, A3, C3, pC3[1], false);
     c.putImageData(imgData, 0, 0);
   }
 
@@ -210,13 +207,13 @@ class ColorCube {
    * Each of these three points have its color defined by RGB values.
    * Return a list of RGB values for [p].
    */
-  colorAtPoint(Point p, Point p1, Point p2, Point p3,
+  colorAtPoint(List p, List p1, List p2, List p3,
                var r1, var g1, var b1,
                var r2, var g2, var b2,
                var r3, var g3, var b3){
     var alpha, beta, gamma;
-    alpha = ((p.x-p3.x)*(p2.y-p3.y)-(p.y-p3.y)*(p2.x-p3.x))/((p1.x-p3.x)*(p2.y-p3.y)-(p1.y-p3.y)*(p2.x-p3.x));
-    beta = ((p.x-p3.x)-alpha*(p1.x-p3.x))/(p2.x-p3.x);
+    alpha = ((p[0]-p3[0])*(p2[1]-p3[1])-(p[1]-p3[1])*(p2[0]-p3[0]))/((p1[0]-p3[0])*(p2[1]-p3[1])-(p1[1]-p3[1])*(p2[0]-p3[0]));
+    beta = ((p[0]-p3[0])-alpha*(p1[0]-p3[0]))/(p2[0]-p3[0]);
     gamma = 1-alpha-beta;
     int red = (alpha*r1 + beta*r2 + gamma*r3).round().toInt();
     int green = (alpha*g1 + beta*g2 + gamma*g3).round().toInt();
@@ -224,7 +221,7 @@ class ColorCube {
     return [red, green, blue];
   }
 
-  void drawSmallWiredCube(CanvasRenderingContext2D c, int k){
+  void drawSmallWiredCube(CanvasRenderingContext2D c){
     var size = 100;
     var diagSize = 40;
     var angle = PI/6;
@@ -234,7 +231,7 @@ class ColorCube {
 
     c.translate(c.canvas.width-size-diagSize-20, c.canvas.height-20);
 
-    drawSmallWiredCubeIntersection(c, k, size, diagSize, angle);
+    drawSmallWiredCubeIntersection(c, size, diagSize, angle);
     
     c.beginPath();
     c.moveTo(0, 0);
@@ -284,17 +281,17 @@ class ColorCube {
     c.translate(-c.canvas.width+size+diagSize+20, -c.canvas.height+20);
   }
 
-  void drawSmallWiredCubeIntersection(CanvasRenderingContext2D c, int k, int size, int diagSize, num angle){
+  void drawSmallWiredCubeIntersection(CanvasRenderingContext2D c, int size, int diagSize, num angle){
     if (k <= 255){
-      drawSmallWiredCubeIntersection1(c, k, size, diagSize, angle);
-    } else if (k > 255 && k < 510){
-      drawSmallWiredCubeIntersection2(c, k, size, diagSize, angle);
+      drawSmallWiredCubeIntersection1(c, size, diagSize, angle);
+    } else if (k < 510){
+      drawSmallWiredCubeIntersection2(c, size, diagSize, angle);
     } else {
-      drawSmallWiredCubeIntersection3(c, k, size, diagSize, angle);
+      drawSmallWiredCubeIntersection3(c, size, diagSize, angle);
     }
   }
 
-  void drawSmallWiredCubeIntersection1(CanvasRenderingContext2D c, int k, int size, int diagSize, num angle){
+  void drawSmallWiredCubeIntersection1(CanvasRenderingContext2D c, int size, int diagSize, num angle){
     c.beginPath();
     var xdiag = diagSize*cos(angle);
     var ydiag = diagSize*sin(angle);
@@ -309,7 +306,7 @@ class ColorCube {
     c.fillRect(k/255*(size+xdiag)/3-1, -k/255*(size+ydiag)/3-1, 2, 2);
   }
 
-  void drawSmallWiredCubeIntersection2(CanvasRenderingContext2D c, int k, int size, int diagSize, num angle){
+  void drawSmallWiredCubeIntersection2(CanvasRenderingContext2D c, int size, int diagSize, num angle){
     c.beginPath();
     var xdiag = diagSize*cos(angle);
     var ydiag = diagSize*sin(angle);
@@ -327,7 +324,7 @@ class ColorCube {
     c.fillRect(k/255*(size+xdiag)/3-1, -k/255*(size+ydiag)/3-1, 2, 2);
   }
 
-  void drawSmallWiredCubeIntersection3(CanvasRenderingContext2D c, int k, int size, int diagSize, num angle){
+  void drawSmallWiredCubeIntersection3(CanvasRenderingContext2D c, int size, int diagSize, num angle){
     c.beginPath();
     var xdiag = diagSize*cos(angle);
     var ydiag = diagSize*sin(angle);
@@ -358,8 +355,7 @@ class ColorCube {
 
   }
 
-
-  void pickColor(int k){
+  void pickColor(){
     ClickHandler clickHandler = new ClickHandler(canvas, drawColorSample);
   }
 
