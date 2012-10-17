@@ -144,8 +144,8 @@ $$.HashMapImplementation = {"":
     numberOfProbes = numberOfProbes0;
   }
 },
- _probeForAdding$1$bailout: function(state, env0, env1, env2, env3) {
-  switch (state) {
+ _probeForAdding$1$bailout: function(state0, env0, env1, env2, env3) {
+  switch (state0) {
     case 1:
       var key = env0;
       t1 = env1;
@@ -157,20 +157,20 @@ $$.HashMapImplementation = {"":
       hash = env3;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
       if (key == null)
         throw $.$$throw($.CTC0);
       var t1 = $.hashCode(key);
     case 1:
-      state = 0;
+      state0 = 0;
       var hash = $.and(t1, this._keys.length - 1);
       var numberOfProbes = 1;
       var insertionIndex = -1;
     case 2:
       L0:
         while (true)
-          switch (state) {
+          switch (state0) {
             case 0:
               if (!true)
                 break L0;
@@ -191,7 +191,7 @@ $$.HashMapImplementation = {"":
               var numberOfProbes0 = numberOfProbes + 1;
               hash = $.HashMapImplementation__nextProbe(hash, numberOfProbes, this._keys.length);
             case 2:
-              state = 0;
+              state0 = 0;
               numberOfProbes = numberOfProbes0;
           }
   }
@@ -218,7 +218,7 @@ $$.HashMapImplementation = {"":
     numberOfProbes = numberOfProbes0;
   }
 },
- _probeForLookup$1$bailout: function(state, key, hash) {
+ _probeForLookup$1$bailout: function(state0, key, hash) {
   for (var numberOfProbes = 1; true;) {
     var t1 = this._keys;
     if (hash !== (hash | 0))
@@ -943,8 +943,8 @@ $$.ColorCube = {"":
       ++d;
   }
 },
- drawColorTriangle$9$bailout: function(state, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12) {
-  switch (state) {
+ drawColorTriangle$9$bailout: function(state0, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12) {
+  switch (state0) {
     case 1:
       var imgData = env0;
       var p1 = env1;
@@ -999,10 +999,10 @@ $$.ColorCube = {"":
       y = env12;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
     case 1:
-      state = 0;
+      state0 = 0;
       if (orientation) {
         var compare = new $.ColorCube_drawColorTriangle_anon();
         var delta = -1;
@@ -1012,13 +1012,13 @@ $$.ColorCube = {"":
       }
       var x1 = $.index(p1, 0);
     case 2:
-      state = 0;
+      state0 = 0;
       var x2 = $.index(p2, 0);
     case 3:
-      state = 0;
+      state0 = 0;
       var y = $.index(p1, 1);
     case 4:
-      state = 0;
+      state0 = 0;
       for (var d = 0.134, color = null, p = null; compare.call$2(y, ymax) === true;) {
         for (var x = x1; $.leB(x, x2); x = $.add(x, 1)) {
           p = [x, y];
@@ -1285,8 +1285,8 @@ $$.ColorCube = {"":
     throw $.iae(b3);
   return [red, green, $.toInt($.round(t20 + gamma * b3))];
 },
- colorAtPoint$13$bailout: function(state, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12, env13, env14, env15, env16, env17) {
-  switch (state) {
+ colorAtPoint$13$bailout: function(state0, env0, env1, env2, env3, env4, env5, env6, env7, env8, env9, env10, env11, env12, env13, env14, env15, env16, env17) {
+  switch (state0) {
     case 1:
       var p = env0;
       var p1 = env1;
@@ -1687,92 +1687,92 @@ $$.ColorCube = {"":
       t30 = env12;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
     case 1:
-      state = 0;
+      state0 = 0;
       if (0 >= p.length)
         throw $.ioore(0);
       var t1 = p[0];
     case 2:
-      state = 0;
+      state0 = 0;
       var t3 = $.index(p3, 0);
     case 3:
-      state = 0;
+      state0 = 0;
       t3 = $.sub(t1, t3);
       t1 = $.index(p2, 1);
     case 4:
-      state = 0;
+      state0 = 0;
       var t6 = $.index(p3, 1);
     case 5:
-      state = 0;
+      state0 = 0;
       t3 = $.mul(t3, $.sub(t1, t6));
       if (1 >= p.length)
         throw $.ioore(1);
       var t8 = p[1];
     case 6:
-      state = 0;
+      state0 = 0;
       var t10 = $.index(p3, 1);
     case 7:
-      state = 0;
+      state0 = 0;
       t10 = $.sub(t8, t10);
       t8 = $.index(p2, 0);
     case 8:
-      state = 0;
+      state0 = 0;
       var t13 = $.index(p3, 0);
     case 9:
-      state = 0;
+      state0 = 0;
       t3 = $.sub(t3, $.mul(t10, $.sub(t8, t13)));
       var t15 = $.index(p1, 0);
     case 10:
-      state = 0;
+      state0 = 0;
       var t17 = $.index(p3, 0);
     case 11:
-      state = 0;
+      state0 = 0;
       t17 = $.sub(t15, t17);
       t15 = $.index(p2, 1);
     case 12:
-      state = 0;
+      state0 = 0;
       var t20 = $.index(p3, 1);
     case 13:
-      state = 0;
+      state0 = 0;
       t17 = $.mul(t17, $.sub(t15, t20));
       var t22 = $.index(p1, 1);
     case 14:
-      state = 0;
+      state0 = 0;
       var t24 = $.index(p3, 1);
     case 15:
-      state = 0;
+      state0 = 0;
       t24 = $.sub(t22, t24);
       t22 = $.index(p2, 0);
     case 16:
-      state = 0;
+      state0 = 0;
       var t27 = $.index(p3, 0);
     case 17:
-      state = 0;
+      state0 = 0;
       var alpha = $.div(t3, $.sub(t17, $.mul(t24, $.sub(t22, t27))));
       if (0 >= p.length)
         throw $.ioore(0);
       t3 = p[0];
     case 18:
-      state = 0;
+      state0 = 0;
       var t30 = $.index(p3, 0);
     case 19:
-      state = 0;
+      state0 = 0;
       t30 = $.sub(t3, t30);
       t3 = $.index(p1, 0);
     case 20:
-      state = 0;
+      state0 = 0;
       var t33 = $.index(p3, 0);
     case 21:
-      state = 0;
+      state0 = 0;
       t30 = $.sub(t30, $.mul(alpha, $.sub(t3, t33)));
       var t35 = $.index(p2, 0);
     case 22:
-      state = 0;
+      state0 = 0;
       var t37 = $.index(p3, 0);
     case 23:
-      state = 0;
+      state0 = 0;
       var beta = $.div(t30, $.sub(t35, t37));
       if (typeof alpha !== 'number')
         throw $.iae(alpha);
@@ -2021,7 +2021,7 @@ $$.ColorCube = {"":
     s = '0' + s;
   return s;
 },
- toHexString$1$bailout: function(state, s) {
+ toHexString$1$bailout: function(state0, s) {
   for (; $.ltB($.get$length(s), 6);)
     s = '0' + $.S(s);
   return s;
@@ -2145,7 +2145,7 @@ $$._ElementAttributeMap = {"":
     this.remove$1(attributes[i].get$name());
   }
 },
- clear$0$bailout: function(state, attributes) {
+ clear$0$bailout: function(state0, attributes) {
   for (var i = $.sub($.get$length(attributes), 1); $.geB(i, 0); i = $.sub(i, 1))
     this.remove$1($.index(attributes, i).get$name());
 },
@@ -2160,7 +2160,7 @@ $$._ElementAttributeMap = {"":
     f.call$2(item.get$name(), item.get$value());
   }
 },
- forEach$1$bailout: function(state, f, attributes) {
+ forEach$1$bailout: function(state0, f, attributes) {
   for (var len = $.get$length(attributes), i = 0; $.ltB(i, len); ++i) {
     var item = $.index(attributes, i);
     f.call$2(item.get$name(), item.get$value());
@@ -2556,7 +2556,7 @@ $$._FixedSizeListIterator = {"":
     return this.hasNext$0$bailout(1, t1);
   return t1 > this._pos;
 },
- hasNext$0$bailout: function(state, t1) {
+ hasNext$0$bailout: function(state0, t1) {
   return $.gt(t1, this._pos);
 }
 };
@@ -2570,7 +2570,7 @@ $$._VariableSizeListIterator = {"":
     return this.hasNext$0$bailout(1, t1);
   return t1 > this._pos;
 },
- hasNext$0$bailout: function(state, t1) {
+ hasNext$0$bailout: function(state0, t1) {
   return $.gt(t1, this._pos);
 },
  next$0: function() {
@@ -2585,7 +2585,7 @@ $$._VariableSizeListIterator = {"":
     throw $.ioore(t3);
   return t1[t3];
 },
- next$0$bailout: function(state, t1) {
+ next$0$bailout: function(state0, t1) {
   var t3 = this._pos;
   this._pos = t3 + 1;
   return $.index(t1, t3);
@@ -2609,7 +2609,7 @@ $$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":
   $.add$1(this.copies_3, null);
   return length$;
 },
- call$1$bailout: function(state, value, t1) {
+ call$1$bailout: function(state0, value, t1) {
   var length$ = $.get$length(t1);
   for (var i = 0; $.ltB(i, length$); ++i) {
     var t2 = $.index(t1, i);
@@ -2764,8 +2764,8 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
   }
   throw $.$$throw($.CTC10);
 },
- call$1$bailout: function(state, env0, env1, env2, env3, env4, env5, env6) {
-  switch (state) {
+ call$1$bailout: function(state0, env0, env1, env2, env3, env4, env5, env6) {
+  switch (state0) {
     case 1:
       var e = env0;
       break;
@@ -2785,7 +2785,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
       length$ = env3;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
       var t1 = {};
       if (e == null)
@@ -2834,11 +2834,11 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
         return t1.copy_1;
       }
     default:
-      if (state === 3 || state === 2 || state === 1 || state === 0 && typeof e === 'object' && e !== null && (e.constructor === Array || e.is$List()))
-        switch (state) {
+      if (state0 === 3 || state0 === 2 || state0 === 1 || state0 === 0 && typeof e === 'object' && e !== null && (e.constructor === Array || e.is$List()))
+        switch (state0) {
           case 0:
           case 1:
-            state = 0;
+            state0 = 0;
             var length$ = $.get$length(e);
             slot = this.findSlot_7.call$1(e);
             t2 = this.readSlot_6;
@@ -2853,23 +2853,23 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
             t1 = e instanceof Array && !!!(e.immutable$list);
             var t3 = this.writeSlot_8;
           case 2:
-            if (state === 2 || state === 0 && t1)
-              switch (state) {
+            if (state0 === 2 || state0 === 0 && t1)
+              switch (state0) {
                 case 0:
                   t3.call$2(slot, true);
                   var i = 0;
                 case 2:
                   L0:
                     while (true)
-                      switch (state) {
+                      switch (state0) {
                         case 0:
                           if (!$.ltB(i, length$))
                             break L0;
                           var element = $.index(e, i);
                           var elementCopy = this.call$1(element);
                         case 2:
-                          if (state === 2 || state === 0 && !(elementCopy == null ? element == null : elementCopy === element))
-                            switch (state) {
+                          if (state0 === 2 || state0 === 0 && !(elementCopy == null ? element == null : elementCopy === element))
+                            switch (state0) {
                               case 0:
                                 copy = t2.call$1(slot);
                                 if (true === copy) {
@@ -2877,7 +2877,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
                                   t3.call$2(slot, copy);
                                 }
                               case 2:
-                                state = 0;
+                                state0 = 0;
                                 for (var j = 0; j < i; ++j)
                                   $.indexSet(copy, j, $.index(e, j));
                                 $.indexSet(copy, i, elementCopy);
@@ -2897,7 +2897,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":
               i = 0;
             }
           case 3:
-            state = 0;
+            state0 = 0;
             for (; $.ltB(i, length$); ++i)
               $.indexSet(copy, i, this.call$1($.index(e, i)));
             return copy;
@@ -2987,7 +2987,7 @@ $$._convertNativeToDart_AcceptStructuredClone_findSlot = {"":
   $.add$1(this.copies_1, null);
   return length$;
 },
- call$1$bailout: function(state, value, t1) {
+ call$1$bailout: function(state0, value, t1) {
   var length$ = $.get$length(t1);
   for (var i = 0; $.ltB(i, length$); ++i) {
     var t2 = $.index(t1, i);
@@ -3071,8 +3071,8 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
   }
   return e;
 },
- call$1$bailout: function(state, env0, env1, env2, env3) {
-  switch (state) {
+ call$1$bailout: function(state0, env0, env1, env2, env3) {
+  switch (state0) {
     case 1:
       var e = env0;
       break;
@@ -3088,10 +3088,10 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
       slot = env3;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
     case 1:
-      state = 0;
+      state0 = 0;
       if (e == null)
         return e;
       if (typeof e === 'boolean')
@@ -3105,8 +3105,8 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
       if (e instanceof RegExp)
         throw $.$$throw($.CTC4);
     case 2:
-      if (state === 2 || state === 0 && $._isJavaScriptSimpleObject(e))
-        switch (state) {
+      if (state0 === 2 || state0 === 0 && $._isJavaScriptSimpleObject(e))
+        switch (state0) {
           case 0:
             var slot = this.findSlot_5.call$1(e);
             var copy = this.readSlot_4.call$1(slot);
@@ -3114,7 +3114,7 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
               return copy;
             copy = $.makeLiteralMap([]);
           case 2:
-            state = 0;
+            state0 = 0;
             this.writeSlot_7.call$2(slot, copy);
             for (var t1 = $.iterator(Object.keys(e)); t1.hasNext$0() === true;) {
               var t2 = t1.next$0();
@@ -3123,8 +3123,8 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
             return copy;
         }
     case 3:
-      if (state === 3 || state === 0 && e instanceof Array)
-        switch (state) {
+      if (state0 === 3 || state0 === 0 && e instanceof Array)
+        switch (state0) {
           case 0:
             slot = this.findSlot_5.call$1(e);
             copy = this.readSlot_4.call$1(slot);
@@ -3133,7 +3133,7 @@ $$._convertNativeToDart_AcceptStructuredClone_walk = {"":
             var length$ = $.get$length(e);
             copy = this.mustCopy_6 === true ? new Array(length$) : e;
           case 3:
-            state = 0;
+            state0 = 0;
             this.writeSlot_7.call$2(slot, copy);
             for (var i = 0; $.ltB(i, length$); ++i)
               $.indexSet(copy, i, this.call$1($.index(e, i)));
@@ -3176,22 +3176,22 @@ $$._convertNativeToDart_IDBKey_containsDate = {"":
   }
   return false;
 },
- call$1$bailout: function(state, env0) {
-  switch (state) {
+ call$1$bailout: function(state0, env0) {
+  switch (state0) {
     case 1:
       var object = env0;
       break;
   }
-  switch (state) {
+  switch (state0) {
     case 0:
       if (object instanceof Date)
         return true;
     case 1:
-      if (state === 1 || state === 0 && typeof object === 'object' && object !== null && (object.constructor === Array || object.is$List()))
-        switch (state) {
+      if (state0 === 1 || state0 === 0 && typeof object === 'object' && object !== null && (object.constructor === Array || object.is$List()))
+        switch (state0) {
           case 0:
           case 1:
-            state = 0;
+            state0 = 0;
             for (var i = 0; $.ltB(i, $.get$length(object)); ++i)
               if (this.call$1($.index(object, i)) === true)
                 return true;
@@ -4500,6 +4500,10 @@ $.truncate = function(receiver) {
   return receiver < 0 ? $.ceil(receiver) : $.floor(receiver);
 };
 
+$.add = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? a + b : $.add$slow(a, b);
+};
+
 $.substringUnchecked = function(receiver, startIndex, endIndex) {
   return receiver.substring(startIndex, endIndex);
 };
@@ -4539,10 +4543,6 @@ $.typeNameInSafari = function(obj) {
   if (name$ === 'WebKitMutationObserver')
     return 'MutationObserver';
   return name$;
-};
-
-$.add = function(a, b) {
-  return typeof a === 'number' && typeof b === 'number' ? a + b : $.add$slow(a, b);
 };
 
 $._ElementAttributeMap$ = function(_element) {
@@ -4780,6 +4780,10 @@ $.JSSyntaxRegExp$ = function(pattern, ignoreCase, multiLine) {
   return new $.JSSyntaxRegExp(pattern, multiLine, ignoreCase);
 };
 
+$.IndexOutOfRangeException$ = function(_value) {
+  return new $.IndexOutOfRangeException(_value);
+};
+
 $.index = function(a, index) {
   if (typeof a == "string" || a.constructor === Array) {
     var key = index >>> 0;
@@ -4787,10 +4791,6 @@ $.index = function(a, index) {
       return a[key];
   }
   return $.index$slow(a, index);
-};
-
-$.IndexOutOfRangeException$ = function(_value) {
-  return new $.IndexOutOfRangeException(_value);
 };
 
 $.le$slow = function(a, b) {
@@ -4971,7 +4971,7 @@ $.DoubleLinkedQueueEntry$ = function(e) {
   return t1;
 };
 
-$.StringImplementation__toJsStringArray$bailout = function(state, strings) {
+$.StringImplementation__toJsStringArray$bailout = function(state0, strings) {
   $.checkNull(strings);
   var length$ = $.get$length(strings);
   if ($.isJsArray(strings)) {
@@ -5629,9 +5629,6 @@ return this[index];
 });
 
 $.$defineNativeClass('DOMTokenList', ["length?"], {
- add$1: function(token) {
-  return this.add(token);
-},
  toString$0: function() {
   return this.toString();
 }
