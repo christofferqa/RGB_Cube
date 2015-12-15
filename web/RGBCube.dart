@@ -1,9 +1,9 @@
-#import('dart:html');
-#import('dart:math');
+import 'dart:html';
+import 'dart:math';
 
 void main() {
   var cube = new ColorCube();
-  query('#container').nodes.add(cube.canvas);
+  querySelector('#container').nodes.add(cube.canvas);
 }
 
 class ColorCube {
@@ -21,11 +21,11 @@ class ColorCube {
 
   ColorCube(){
     size = 600;
-    canvas = new CanvasElement(size,size);
+    canvas = new CanvasElement(width: size, height: size);
     canvas.attributes['style'] = 'border : 1px black solid';
-    var context = canvas.context2d;
+    var context = canvas.context2D;
 
-    InputElement slider = query('#slider');
+    InputElement slider = querySelector('#slider');
     k = int.parse(slider.value);
     init1();
     pickColor();
@@ -33,12 +33,12 @@ class ColorCube {
     draw(context);
     drawSmallWiredCube(context);
 
-    slider.on.change.add((Event e) {
+    slider.onChange.listen((Event e) {
       k = int.parse(slider.value);
-      query('#sliderValue').text = "$k";
+      querySelector('#sliderValue').text = "$k";
       draw(context);
       drawSmallWiredCube(context);
-    }, true);
+    }, cancelOnError: true);
 
   }
 
@@ -376,16 +376,13 @@ class Point {
 
 class ClickHandler{
   CanvasElement canvas;
-  Point clientBoundingRect;
+  Rectangle<num> clientBoundingRect;
   Future<ElementRect> futureRect;
   Function callback;
 
   ClickHandler(this.canvas, this.callback){
-    futureRect = canvas.rect;
-    futureRect.then((ElementRect rect) {
-      clientBoundingRect = new Point(rect.bounding.left, rect.bounding.top);
-    });
-    canvas.on.click.add((e){
+    clientBoundingRect = canvas.getBoundingClientRect();
+    canvas.onClick.listen((e){
         var point = getXandY(e);
         callback(this.canvas, point.x, point.y);
     });

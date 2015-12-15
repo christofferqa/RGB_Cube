@@ -1,0 +1,8 @@
+name: rgb_cube
+version: 1.0.0
+description: An RGB Cube application
+dependencies:
+  browser: any
+dev_dependencies:
+  runtime:
+    path: ../../../web_runtime
