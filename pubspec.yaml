@@ -4,5 +4,3 @@ description: An RGB Cube application
 dependencies:
   browser: any
 dev_dependencies:
-  runtime:
-    path: ../../../web_runtime
